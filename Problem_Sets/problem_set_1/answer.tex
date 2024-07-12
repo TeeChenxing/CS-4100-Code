@@ -120,9 +120,43 @@ Problem set 1 for CS 4100 Summer II, year 2024.
 
 \section{Local Search}
 
+Your professor is a coffee snob, and since he knows a thing or two about AI, he tries to
+build an espresso machine that will learn a user’s preferences over time to pull the perfect
+shot. He lets the machine control the following values:
+
+\begin{itemize}
+    \item Weight of coffee beans (15-21 grams)
+    \item Grind size (250 - 400 microns)
+    \item Water Pressure (7 - 11 bars)
+    \item Brew time (27 - 33 seconds)
+\end{itemize}
+
 \begin{enumerate}[start=9,label=Q\arabic*,left=0pt]
     \item \textbf{Based on our discussions in class, is this problem well-suited to local search algorithms? Explain your reasoning.}
+    \par This problem focuses on learning the user's preferences to be able to mix coffee with the most optimal
+    ingredients for the user. Thus, in other words, we can say that this problem focuses only on the final solution and not neccessarily
+    which optimizations/paths were taken to get to the perfect mix. Conveniently, local search algorithms are tailored
+    for this kind of problem and so I think this problem is well suited for local search algorithms to solve.
+    
     \item \textbf{How you would implement such a program? What would be a reasonable objective function? (This question is somewhat open-ended, so don’t worry too much about the ‘right’ answer. I am really looking for whether your thought process reflects a solid understanding of how local search works.)}
+    \par I would use a hill-climbing algorithm. I would define the objective function to be based on user feedback.
+    Lets say for each cup of coffee this machine brews, the user rates the coffee from 1 to 10 where 10 would mean perfect.
+    The objection function $f(x)$ would try to maximize the user rating. However, if we want to use gradient descent, we can manipulate the 
+    user rating by doing 
+    
+    \[f(x) = 10 - User Rating(x)\]
+
+    This would mean that a user rating of 10 becomes:
+
+    \[ f(x) = 10 - 10 = 0 \quad \xleftarrow{\text{best value}} \]
+
+    and a user rating of 1 becomes:
+
+    \[ f(x) = 10 - 1 = 9 \quad \xleftarrow{\text{worst value}} \]
+
+    If we do this, we can frame the objective function from maximizing to minimizing $f(x)$ and thus perform gradient descent
+    to find the optimal coffee blend.
+
     \item \textbf{Which of the optimizations and local search variants discussed in class (random restarts, varying step size, simulated annealing and genetic algorithms) are applicable to this problem, and why?}
 
 \end{enumerate}
