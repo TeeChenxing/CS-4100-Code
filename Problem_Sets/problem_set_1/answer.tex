@@ -13,6 +13,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{enumitem}
 \usepackage{float}
+\usepackage{hyperref}
 
 \providecommand{\keywords}[1]
 {
@@ -35,7 +36,7 @@
 
 \section*{Overview}
 
-Problem set 1 for CS 4100 Summer II, year 2024.
+Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \href{https://rajagopalvenkat.com/}{Rajagopal Venkat}. \cite{MISC:1}
 
 \section{Categorizing AI Environments}
 
@@ -89,6 +90,25 @@ Problem set 1 for CS 4100 Summer II, year 2024.
 
 \section{Search}
 
+\par In this problem set, we will be using Rook Jumping Mazes (RJMs) - a game based on
+Rook moves in Chess - to understand various search techniques. In a RJM, you are
+given a square $n \times n$ grid, with each cell containing a number between $1$ to $n - 1$. From
+any cell, the player may move either horizontally or vertically but must take exactly the
+number of steps as shown on the player’s current cell. Regardless of the length of the
+jump (i.e. number of cells passed), this action is considered a single jump (i.e., having a
+cost of 1) for purposes of our search. The objective is to get from an assigned start state
+to a pre-specified goal state. Consider this example:
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[height=0.2\textheight]{Search_RJM.png}
+    \label{fig:Search_RJM}
+\end{figure}
+
+\noindent The cell D1 is the start state and the cell A2 is the goal state. The shortest solution to this
+RJM is: [D1, A1, A5, C5, C1, C2, D2, A2]. Such a game lends itself well to the various
+search algorithms we covered in class.
+
 \begin{enumerate}[start=6,label=Q\arabic*,left=0pt]
     \item \textbf{Can both Breadth-First Search (BFS) and Depth-First Search (DFS) be used to solve RJMs? Will both yield the shortest path?}
     \par Yes, BFS and DFS can be used to solve RJMs. This is because we can turn a RJM into an unweighted graph which BFS and DFS 
@@ -103,10 +123,93 @@ Problem set 1 for CS 4100 Summer II, year 2024.
     from class that A* search requires a consistent heuristic to guarantee an optimal solution.
     Show that for this problem, the Manhattan distance from any cell to the goal cell divided
     by (n - 1) is a consistent heuristic, where n is the number of cells in a row/column. In other words, show that}
-    \[
-    H(node, goal, n) = \frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1}
-    \]
+
+    \[ H(node, goal, n) = \frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \]
+
     \textbf{is a consistent heuristic. Remember that a proof may not rely on a single example, but instead must hold true in general.}
+    
+    \par Here, we want to proof that using the Manhattan distance, this equation holds true for all cases:
+    \[ h(n) \leq c(n \rightarrow n') + h(n') \]
+    Where $n = current\:node$ and $n' = neighbors\:of\:node\:n$. Starting at node n, we can move right, up, left or down:
+    \begin{enumerate}[start=1,label=\arabic*.,left=0pt]
+        \item $ x = k, \quad y = 0 $
+        \item $ x = 0, \quad y = k $ 
+        \item $ x = -k, \quad y = 0 $
+        \item $ x = 0, \quad y = -k $
+    \end{enumerate}
+
+    Where $ k \in \{1, \ldots, n-1\} $.
+
+    Case 1:
+    \begin{align*}
+        &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 + \frac{|(node_x + k) - goal_x| + |node_y - goal_y|}{n - 1} \\
+        &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} - \frac{|(node_x + k) - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 \\
+        &\frac{|node_x - goal_x| + |(node_x + k) - goal_x|}{n - 1} \leq 1 \\
+        &|node_x - goal_x| + |(node_x + k) - goal_x| \leq n - 1 \\\\
+        &\text{Let} \:\: node_x - goal_x = f \\\\
+        &|f| - |f + k| \leq n - 1 \\
+        &-k \leq n - 1 \\
+        &k \geq -n + 1 \\\\
+        &\text{Lower End of k = 1} \\
+        &1 \geq -n + 1 \\
+        &n \geq 0 \\\\
+        &\text{Upper End of k = n - 1} \\
+        &n - 1 \geq -n + 1 \\
+        &2n \geq 2 \\
+        &n \geq 1
+    \end{align*}
+
+    Case 2:
+    \begin{align*}
+        &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 + \frac{|node_x - goal_x| + |(node_y + k) - goal_y|}{n - 1} \\
+        &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} - \frac{|node_x - goal_x| + |(node_y + k) - goal_y|}{n - 1} \leq 1 \\
+        &\frac{|node_y - goal_y| + |(node_y + k) - goal_y|}{n - 1} \leq 1 \\
+        &|node_y - goal_y| + |(node_y + k) - goal_y| \leq n - 1 \\\\
+        &\text{Let} \:\: node_y - goal_y = f \\\\
+        &|f| - |f + k| \leq n - 1 \\
+        &-k \leq n - 1 \\
+        &k \geq -n + 1 \\\\
+        &\text{Lower End of k = 1} \\
+        &1 \geq -n + 1 \\
+        &n \geq 0 \\\\
+        &\text{Upper End of k = n - 1} \\
+        &n - 1 \geq -n + 1 \\
+        &2n \geq 2 \\
+        &n \geq 1
+    \end{align*}
+
+    Case 3:
+    \begin{align*}
+        &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 + \frac{|(node_x - k) - goal_x| + |node_y - goal_y|}{n - 1} \\
+        &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} - \frac{|(node_x - k) - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 \\
+        &\frac{|node_x - goal_x| + |(node_x - k) - goal_x|}{n - 1} \leq 1 \\
+        &|node_x - goal_x| + |(node_x - k) - goal_x| \leq n - 1 \\\\
+        &\text{Let} \:\: node_x - goal_x = f \\\\
+        &|f| - |f - k| \leq n - 1 \\
+        &k \leq n - 1 \\\\
+        &\text{We know that k = [1, n - 1]} \\
+        &[1, \: n - 1] \leq n - 1 \\\\
+        &\text{Thus, we know that the statement above will always hold true because} \: n \: \\
+        &\text{will always be at least 1.}
+    \end{align*} 
+
+    Case 4:
+    \begin{align*}
+        &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 + \frac{|node_x - goal_x| + |(node_y - k) - goal_y|}{n - 1} \\
+        &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} - \frac{|node_x - goal_x| + |(node_y - k) - goal_y|}{n - 1} \leq 1 \\
+        &\frac{|node_y - goal_y| + |(node_y - k) - goal_y|}{n - 1} \leq 1 \\
+        &|node_y - goal_y| + |(node_y - k) - goal_y| \leq n - 1 \\\\
+        &\text{Let} \:\: node_y - goal_y = f \\\\
+        &|f| - |f - k| \leq n - 1 \\
+        &k \leq n - 1 \\\\
+        &\text{We know that k = [1, n - 1]} \\
+        &[1, \: n - 1] \leq n - 1 \\\\
+        &\text{Thus, we know that the statement above will always hold true because} \: n \: \\
+        &\text{will always be at least 1.}
+    \end{align*} 
+
+    $\therefore \text{By proving all 4 cases, we can say that } H(node, goal, n) = \frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1}$ \\ 
+    is a consistent heuristic.
     
     \item \textbf{Consider the following RJM:}
     \begin{figure}[H]
@@ -133,10 +236,9 @@ shot. He lets the machine control the following values:
 
 \begin{enumerate}[start=9,label=Q\arabic*,left=0pt]
     \item \textbf{Based on our discussions in class, is this problem well-suited to local search algorithms? Explain your reasoning.}
-    \par This problem focuses on learning the user's preferences to be able to mix coffee with the most optimal
-    ingredients for the user. Thus, in other words, we can say that this problem focuses only on the final solution and not neccessarily
-    which optimizations/paths were taken to get to the perfect mix. Conveniently, local search algorithms are tailored
-    for this kind of problem and so I think this problem is well suited for local search algorithms to solve.
+    \par This problem aims to learn the user’s preferences to create the most optimal coffee mix tailored to the user. 
+    In other words, the focus is on the final solution rather than the specific optimizations or paths taken to achieve the perfect mix. 
+    Conveniently, local search algorithms are designed for this type of problem, making them well-suited for finding the ideal solution.
     
     \item \textbf{How you would implement such a program? What would be a reasonable objective function? (This question is somewhat open-ended, so don’t worry too much about the ‘right’ answer. I am really looking for whether your thought process reflects a solid understanding of how local search works.)}
     \par I would use a hill-climbing algorithm. I would define the objective function to be based on user feedback.
@@ -158,14 +260,40 @@ shot. He lets the machine control the following values:
     to find the optimal coffee blend.
 
     \item \textbf{Which of the optimizations and local search variants discussed in class (random restarts, varying step size, simulated annealing and genetic algorithms) are applicable to this problem, and why?}
+    \par All 4 techniques are applicable to this solution. For random restarts, lets assume we are trying to minimize the objective
+    function, the optimization algorithm we are using may get stuck inside a valley which may not be the global minimum. By using random
+    restarts, we will be able to move to a different spot and hopefully find a better minimum.
 
+    Varying step size can also be useful in finding the optimal solution. We can start with a larger step size to allow the algorithm
+    to traverse a greater area of the search space and gradually reduce the step size as we hone in on a solution. 
+
+    For simulated annealing, this technique accepts a worse solution with a probability that decreases over time. This encourages the algorithm
+    to explore a larger area that surrounds the initial starting position in the hopes of finding a better local minimum and avoid being trapped
+    inside a valley. 
+
+    Lastly, genetic algorithms will allow the algorithm to explore multiple solutions that evolve/change over time. For example,
+    it is common for a person's taste to change over time, and since genetic algorithms thrive based on the concept of change, it is particularly suited
+    to this problem as it can adapt the espresso's machine mixture according to the user's changing tastes.
 \end{enumerate}
 
 \section{Adversarial Search}
 
 \begin{enumerate}[start=12,label=Q\arabic*,left=0pt]
     \item \textbf{Construct a game tree example with a depth of 4 and a branching factor of 2, that illustrates the best-case for alpha-beta pruning, except for the trivial solution. Hand drawn figures accepted for this question, but please ensure clarity.}
+    \begin{figure}[H]
+        \centering  
+        \includegraphics[height=0.2\textheight]{Q12_tree.png}
+        \label{fig:Q12_tree}
+    \end{figure}
+
     \item \textbf{Why is it desirable to combine iterative deepening with alpha-beta pruning from a practical standpoint?}
+    \par Iterative deepening allows us to use DFS's low memory requirement combined with BFS's ability to explore multiple solutions.
+    Alpha-beta pruning, on the other hand, reduces the number of nodes/branches needed to be evaluated and explored speeding up the search
+    by eliminating branches that cannot influence the final decision.
+
+    By combining these two together, the search can hone-in on more promising paths due to iterative deepening and
+    skip exploring paths that are redundant. This will allow us to perform the search on a much bigger tree due to the low memory usage
+    but at the same time, find a relatively good solution in a timely manner.
 
 \end{enumerate}
 
@@ -181,8 +309,6 @@ shot. He lets the machine control the following values:
 \end{enumerate}
 \end{sloppypar}
 
-\cite{BOOK:1}
-\cite{ARTICLE:1}
 \bibliography{references}
 \bibliographystyle{ieeetr}
 
