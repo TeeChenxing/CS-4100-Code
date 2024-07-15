@@ -14,6 +14,8 @@
 \usepackage{enumitem}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{amssymb}
+
 
 \providecommand{\keywords}[1]
 {
@@ -144,8 +146,8 @@ search algorithms we covered in class.
     \begin{align*}
         &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 + \frac{|(node_x + k) - goal_x| + |node_y - goal_y|}{n - 1} \\
         &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} - \frac{|(node_x + k) - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 \\
-        &\frac{|node_x - goal_x| + |(node_x + k) - goal_x|}{n - 1} \leq 1 \\
-        &|node_x - goal_x| + |(node_x + k) - goal_x| \leq n - 1 \\\\
+        &\frac{|node_x - goal_x| - |(node_x + k) - goal_x|}{n - 1} \leq 1 \\
+        &|node_x - goal_x| - |(node_x + k) - goal_x| \leq n - 1 \\\\
         &\text{Let} \:\: node_x - goal_x = f \\\\
         &|f| - |f + k| \leq n - 1 \\
         &-k \leq n - 1 \\
@@ -156,15 +158,16 @@ search algorithms we covered in class.
         &\text{Upper End of k = n - 1} \\
         &n - 1 \geq -n + 1 \\
         &2n \geq 2 \\
-        &n \geq 1
+        &n \geq 1 \\\\
+        &\text{These inequalities will always hold true since n will always be at least 1.}
     \end{align*}
 
     Case 2:
     \begin{align*}
         &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 + \frac{|node_x - goal_x| + |(node_y + k) - goal_y|}{n - 1} \\
         &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} - \frac{|node_x - goal_x| + |(node_y + k) - goal_y|}{n - 1} \leq 1 \\
-        &\frac{|node_y - goal_y| + |(node_y + k) - goal_y|}{n - 1} \leq 1 \\
-        &|node_y - goal_y| + |(node_y + k) - goal_y| \leq n - 1 \\\\
+        &\frac{|node_y - goal_y| - |(node_y + k) - goal_y|}{n - 1} \leq 1 \\
+        &|node_y - goal_y| - |(node_y + k) - goal_y| \leq n - 1 \\\\
         &\text{Let} \:\: node_y - goal_y = f \\\\
         &|f| - |f + k| \leq n - 1 \\
         &-k \leq n - 1 \\
@@ -175,15 +178,16 @@ search algorithms we covered in class.
         &\text{Upper End of k = n - 1} \\
         &n - 1 \geq -n + 1 \\
         &2n \geq 2 \\
-        &n \geq 1
+        &n \geq 1 \\\\
+        &\text{These inequalities will always hold true since n will always be at least 1.}
     \end{align*}
 
     Case 3:
     \begin{align*}
         &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 + \frac{|(node_x - k) - goal_x| + |node_y - goal_y|}{n - 1} \\
         &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} - \frac{|(node_x - k) - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 \\
-        &\frac{|node_x - goal_x| + |(node_x - k) - goal_x|}{n - 1} \leq 1 \\
-        &|node_x - goal_x| + |(node_x - k) - goal_x| \leq n - 1 \\\\
+        &\frac{|node_x - goal_x| - |(node_x - k) - goal_x|}{n - 1} \leq 1 \\
+        &|node_x - goal_x| - |(node_x - k) - goal_x| \leq n - 1 \\\\
         &\text{Let} \:\: node_x - goal_x = f \\\\
         &|f| - |f - k| \leq n - 1 \\
         &k \leq n - 1 \\\\
@@ -197,8 +201,8 @@ search algorithms we covered in class.
     \begin{align*}
         &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \leq 1 + \frac{|node_x - goal_x| + |(node_y - k) - goal_y|}{n - 1} \\
         &\frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} - \frac{|node_x - goal_x| + |(node_y - k) - goal_y|}{n - 1} \leq 1 \\
-        &\frac{|node_y - goal_y| + |(node_y - k) - goal_y|}{n - 1} \leq 1 \\
-        &|node_y - goal_y| + |(node_y - k) - goal_y| \leq n - 1 \\\\
+        &\frac{|node_y - goal_y| - |(node_y - k) - goal_y|}{n - 1} \leq 1 \\
+        &|node_y - goal_y| - |(node_y - k) - goal_y| \leq n - 1 \\\\
         &\text{Let} \:\: node_y - goal_y = f \\\\
         &|f| - |f - k| \leq n - 1 \\
         &k \leq n - 1 \\\\
@@ -209,7 +213,7 @@ search algorithms we covered in class.
     \end{align*} 
 
     $\therefore \text{By proving all 4 cases, we can say that } H(node, goal, n) = \frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1}$ \\ 
-    is a consistent heuristic.
+    $\text{is a consistent heuristic.} \hfill \blacksquare$
     
     \item \textbf{Consider the following RJM:}
     \begin{figure}[H]
@@ -218,6 +222,102 @@ search algorithms we covered in class.
         \label{fig:Q8_RJM}
     \end{figure}
     \textbf{On this maze, using the heuristic from Q7, complete the A* search process shown be- low, starting with Step 2. Terminate your search when the Goal node (cell D4) is popped from the priority queue. Double check your calculations!}
+    
+    \par Step 2:
+    \begin{align*}
+        &\rightarrow \text{Pop D2} \\
+        &\text{Neighbors of D2 = D1, C2, D3} \\\\
+        &D1 \: \text{Priority} = \text{cost} + \text{wt(D2, D1)} + H(D1) = 1 + 1 + 1 = 3 \\
+        &C2 \: \text{Priority} = \text{cost} + \text{wt(D2, C2)} + H(C2) = 1 + 1 + 1 = 3 \\
+        &D3 \: \text{Priority} = \text{cost} + \text{wt(D2, D3)} + H(D3) = 1 + 1 + \frac{1}{3} = \frac{7}{3} \\\\
+        &\text{D1 Cost = 2, C2 cost = 2, D3 cost = 2} \\
+        &\rightarrow \text{Push D1, C2, D3 to PQ} \\\\
+        &\text{PQ} = \left\{\begin{array}{l}
+            (B4, \frac{5}{3}, 1, [B2]), \\
+            (D3, \frac{7}{3}, 2, [B2, D2]), \\
+            (D1, 3, 2, [B2, D2]), \\
+            (C2, 3, 2, [B2, D2])
+        \end{array}\right\}
+    \end{align*}
+
+    \par Step 3:
+    \begin{align*}
+        &\rightarrow \text{Pop B4} \\
+        &\text{Neighbors of B4 = A4, B3, C4} \\\\
+        &A4 \: \text{Priority} = \text{cost} + \text{wt(B4, A4)} + H(A4) = 1 + 1 + 1 = 3 \\
+        &B3 \: \text{Priority} = \text{cost} + \text{wt(B4, B3)} + H(B3) = 1 + 1 + 1 = 3 \\
+        &C4 \: \text{Priority} = \text{cost} + \text{wt(B4, C4)} + H(C4) = 1 + 1 + \frac{1}{3} = \frac{7}{3} \\\\
+        &\text{A4 Cost = 2, B3 cost = 2, C4 cost = 2} \\
+        &\rightarrow \text{Push A4, B3, C4 to PQ} \\\\
+        &\text{PQ} = \left\{\begin{array}{l}
+            (D3, \frac{7}{3}, 2, [B2, D2]), \\
+            (C4, \frac{7}{3}, 2, [B2, B4]), \\
+            (A4, 3, 2, [B2, B4]), \\
+            (C2, 3, 2, [B2, D2]), \\
+            (D1, 3, 2, [B2, D2]), \\
+            (B3, 3, 2, [B2, B4])
+        \end{array}\right\}
+    \end{align*}
+
+    \par Step 4:
+    \begin{align*}
+        &\rightarrow \text{Pop D3} \\
+        &\text{Neighbors of D3 = A3} \\\\
+        &A3 \: \text{Priority} = \text{cost} + \text{wt(D3, A3)} + H(A3) = 2 + 1 + \frac{4}{3} = \frac{13}{3} \\
+        &\text{A3 Cost = 3} \\
+        &\rightarrow \text{Push A3 to PQ} \\\\
+        &\text{PQ} = \left\{\begin{array}{l}
+            (C4, \frac{7}{3}, 2, [B2, B4]), \\
+            (A4, 3, 2, [B2, B4]), \\
+            (C2, 3, 2, [B2, D2]), \\
+            (D1, 3, 2, [B2, D2]), \\
+            (B3, 3, 2, [B2, B4]), \\
+            (A3, \frac{13}{3}, 3, [B2, D2, D3])
+        \end{array}\right\}
+    \end{align*}
+
+    \par Step 5:
+    \begin{align*}
+        &\rightarrow \text{Pop C4} \\
+        &\text{Neighbors of C4 = C1} \\\\
+        &C1 \: \text{Priority} = \text{cost} + \text{wt(C4, C1)} + H(C1) = 2 + 1 + \frac{4}{3} = \frac{13}{3} \\
+        &\text{C1 Cost = 3} \\
+        &\rightarrow \text{Push C1 to PQ} \\\\
+        &\text{PQ} = \left\{\begin{array}{l}
+            (A4, 3, 2, [B2, B4]), \\
+            (C2, 3, 2, [B2, D2]), \\
+            (D1, 3, 2, [B2, D2]), \\
+            (B3, 3, 2, [B2, B4]), \\
+            (A3, \frac{13}{3}, 3, [B2, D2, D3]), \\
+            (C1, \frac{13}{3}, 3, [B2, B4, C4])
+        \end{array}\right\}
+    \end{align*}
+
+    \par Step 6:
+    \begin{align*}
+        &\rightarrow \text{Pop A4} \\
+        &\text{Neighbors of A4 = A1, D4} \\\\
+        &A1 \: \text{Priority} = \text{cost} + \text{wt(A4, A1)} + H(A1) = 2 + 1 + 2 = 5 \\
+        &D4 \: \text{Priority} = \text{cost} + \text{wt(A4, D4)} + H(D4) = 2 + 1 + 0 = 3 \\
+        &\text{A1 Cost = 3, D4 Cost = 3} \\
+        &\rightarrow \text{Push A1, D4 to PQ} \\\\
+        &\text{PQ} = \left\{\begin{array}{l}
+            (D4, 3, 3, [B2, B4, A4]) \\
+            (C2, 3, 2, [B2, D2]), \\
+            (D1, 3, 2, [B2, D2]), \\
+            (B3, 3, 2, [B2, B4]), \\
+            (A3, \frac{13}{3}, 3, [B2, D2, D3]), \\
+            (C1, \frac{13}{3}, 3, [B2, B4, C4]), \\
+            (A1, 5, 3, [B2, B4, A4])
+        \end{array}\right\}
+    \end{align*}
+
+    \par Step 7:
+    \begin{align*}
+        &\rightarrow \text{Pop D4} \\
+        &\rightarrow \text{Goal is found!} \\
+        &\rightarrow \text{path = [B2, B4, A4, D4]}
+    \end{align*}
 
 \end{enumerate}
 
