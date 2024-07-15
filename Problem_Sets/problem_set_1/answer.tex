@@ -15,6 +15,7 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{amssymb}
+\usepackage{xcolor}
 
 
 \providecommand{\keywords}[1]
@@ -223,100 +224,127 @@ search algorithms we covered in class.
     \end{figure}
     \textbf{On this maze, using the heuristic from Q7, complete the A* search process shown be- low, starting with Step 2. Terminate your search when the Goal node (cell D4) is popped from the priority queue. Double check your calculations!}
     
+    \par Initialization:
+    \begin{align*}\
+        &\rightarrow \text{Starting at node B2} \\
+        &B2 \: \text{Priority} = \text{cost} + H(B2) = 0 + \frac{4}{3} = \frac{4}{3} \\\\
+        &\text{B2 Cost = 0} \\
+        &\rightarrow \text{Push B2 to PQ} \\\\
+        &\text{PQ} = \left\{\begin{array}{l}
+            (v=B2, priority=\frac{4}{3}, cost=0, path=[])
+        \end{array}\right\}
+    \end{align*}
+
+    \par Step 1:
+    \begin{align*}
+        &\rightarrow \text{Pop B2} \\
+        &\text{Neighbor(s) of B2 = D2, B4} \\\\
+        &D2 \: \text{Priority} = \text{cost} + \text{wt(B2, D2)} + H(D2) = 0 + 1 + \frac{2}{3} = \frac{5}{3} \\
+        &B4 \: \text{Priority} = \text{cost} + \text{wt(B2, C4)} + H(B4) = 0 + 1 + \frac{2}{3} = \frac{5}{3} \\\\
+        &\text{D2 Cost = 1, B4 cost = 1} \\
+        &\rightarrow \text{Push D2, B4 to PQ} \\\\
+        &\text{PQ} = \left\{\begin{array}{l}
+            (v=D2, priority=\frac{5}{3}, cost=1, path=[B2]), \\
+            (v=B4, priority=\frac{5}{3}, cost=1, path=[B2])
+        \end{array}\right\}
+    \end{align*}
+
     \par Step 2:
     \begin{align*}
         &\rightarrow \text{Pop D2} \\
-        &\text{Neighbors of D2 = D1, C2, D3} \\\\
+        &\text{Neighbor(s) of D2 = D1, C2, D3} \\\\
         &D1 \: \text{Priority} = \text{cost} + \text{wt(D2, D1)} + H(D1) = 1 + 1 + 1 = 3 \\
         &C2 \: \text{Priority} = \text{cost} + \text{wt(D2, C2)} + H(C2) = 1 + 1 + 1 = 3 \\
         &D3 \: \text{Priority} = \text{cost} + \text{wt(D2, D3)} + H(D3) = 1 + 1 + \frac{1}{3} = \frac{7}{3} \\\\
         &\text{D1 Cost = 2, C2 cost = 2, D3 cost = 2} \\
         &\rightarrow \text{Push D1, C2, D3 to PQ} \\\\
         &\text{PQ} = \left\{\begin{array}{l}
-            (B4, \frac{5}{3}, 1, [B2]), \\
-            (D3, \frac{7}{3}, 2, [B2, D2]), \\
-            (D1, 3, 2, [B2, D2]), \\
-            (C2, 3, 2, [B2, D2])
+            (v=B4, priority=\frac{5}{3}, cost=1, path=[B2]), \\
+            (v=D3, priority=\frac{7}{3}, cost=2, path=[B2, D2]), \\
+            (v=D1, priority=3, cost=2, path=[B2, D2]), \\
+            (v=C2, priority=3, cost=2, path=[B2, D2])
         \end{array}\right\}
     \end{align*}
 
     \par Step 3:
     \begin{align*}
         &\rightarrow \text{Pop B4} \\
-        &\text{Neighbors of B4 = A4, B3, C4} \\\\
+        &\text{Neighbor(s) of B4 = A4, B3, C4} \\\\
         &A4 \: \text{Priority} = \text{cost} + \text{wt(B4, A4)} + H(A4) = 1 + 1 + 1 = 3 \\
         &B3 \: \text{Priority} = \text{cost} + \text{wt(B4, B3)} + H(B3) = 1 + 1 + 1 = 3 \\
         &C4 \: \text{Priority} = \text{cost} + \text{wt(B4, C4)} + H(C4) = 1 + 1 + \frac{1}{3} = \frac{7}{3} \\\\
         &\text{A4 Cost = 2, B3 cost = 2, C4 cost = 2} \\
         &\rightarrow \text{Push A4, B3, C4 to PQ} \\\\
         &\text{PQ} = \left\{\begin{array}{l}
-            (D3, \frac{7}{3}, 2, [B2, D2]), \\
-            (C4, \frac{7}{3}, 2, [B2, B4]), \\
-            (A4, 3, 2, [B2, B4]), \\
-            (C2, 3, 2, [B2, D2]), \\
-            (D1, 3, 2, [B2, D2]), \\
-            (B3, 3, 2, [B2, B4])
+            (v=D3, priority=\frac{7}{3}, cost=2, path=[B2, D2]), \\
+            (v=C4, priority=\frac{7}{3}, cost=2, path=[B2, B4]), \\
+            (v=A4, priority=3, cost=2, path=[B2, B4]), \\
+            (v=C2, priority=3, cost=2, path=[B2, D2]), \\
+            (v=D1, priority=3, cost=2, path=[B2, D2]), \\
+            (v=B3, priority=3, cost=2, path=[B2, B4])
         \end{array}\right\}
     \end{align*}
 
     \par Step 4:
     \begin{align*}
         &\rightarrow \text{Pop D3} \\
-        &\text{Neighbors of D3 = A3} \\\\
-        &A3 \: \text{Priority} = \text{cost} + \text{wt(D3, A3)} + H(A3) = 2 + 1 + \frac{4}{3} = \frac{13}{3} \\
+        &\text{Neighbor(s) of D3 = A3} \\\\
+        &A3 \: \text{Priority} = \text{cost} + \text{wt(D3, A3)} + H(A3) = 2 + 1 + \frac{4}{3} = \frac{13}{3} \\\\
         &\text{A3 Cost = 3} \\
         &\rightarrow \text{Push A3 to PQ} \\\\
         &\text{PQ} = \left\{\begin{array}{l}
-            (C4, \frac{7}{3}, 2, [B2, B4]), \\
-            (A4, 3, 2, [B2, B4]), \\
-            (C2, 3, 2, [B2, D2]), \\
-            (D1, 3, 2, [B2, D2]), \\
-            (B3, 3, 2, [B2, B4]), \\
-            (A3, \frac{13}{3}, 3, [B2, D2, D3])
+            (v=C4, priority=\frac{7}{3}, cost=2, path=[B2, B4]), \\
+            (v=A4, priority=3, cost=2, path=[B2, B4]), \\
+            (v=C2, priority=3, cost=2, path=[B2, D2]), \\
+            (v=D1, priority=3, cost=2, path=[B2, D2]), \\
+            (v=B3, priority=3, cost=2, path=[B2, B4]), \\
+            (v=A3, priority=\frac{13}{3}, cost=3, path=[B2, D2, D3])
         \end{array}\right\}
     \end{align*}
 
     \par Step 5:
     \begin{align*}
         &\rightarrow \text{Pop C4} \\
-        &\text{Neighbors of C4 = C1} \\\\
-        &C1 \: \text{Priority} = \text{cost} + \text{wt(C4, C1)} + H(C1) = 2 + 1 + \frac{4}{3} = \frac{13}{3} \\
+        &\text{Neighbor(s) of C4 = C1} \\\\
+        &C1 \: \text{Priority} = \text{cost} + \text{wt(C4, C1)} + H(C1) = 2 + 1 + \frac{4}{3} = \frac{13}{3} \\\\
         &\text{C1 Cost = 3} \\
         &\rightarrow \text{Push C1 to PQ} \\\\
         &\text{PQ} = \left\{\begin{array}{l}
-            (A4, 3, 2, [B2, B4]), \\
-            (C2, 3, 2, [B2, D2]), \\
-            (D1, 3, 2, [B2, D2]), \\
-            (B3, 3, 2, [B2, B4]), \\
-            (A3, \frac{13}{3}, 3, [B2, D2, D3]), \\
-            (C1, \frac{13}{3}, 3, [B2, B4, C4])
+            (v=A4, priority=3, cost=2, path=[B2, B4]), \\
+            (v=C2, priority=3, cost=2, path=[B2, D2]), \\
+            (v=D1, priority=3, cost=2, path=[B2, D2]), \\
+            (v=B3, priority=3, cost=2, path=[B2, B4]), \\
+            (v=A3, priority=\frac{13}{3}, cost=3, path=[B2, D2, D3]), \\
+            (v=C1, priority=\frac{13}{3}, cost=3, path=[B2, B4, C4])
         \end{array}\right\}
     \end{align*}
 
     \par Step 6:
     \begin{align*}
         &\rightarrow \text{Pop A4} \\
-        &\text{Neighbors of A4 = A1, D4} \\\\
+        &\text{Neighbor(s) of A4 = A1, D4} \\\\
         &A1 \: \text{Priority} = \text{cost} + \text{wt(A4, A1)} + H(A1) = 2 + 1 + 2 = 5 \\
-        &D4 \: \text{Priority} = \text{cost} + \text{wt(A4, D4)} + H(D4) = 2 + 1 + 0 = 3 \\
+        &D4 \: \text{Priority} = \text{cost} + \text{wt(A4, D4)} + H(D4) = 2 + 1 + 0 = 3 \\\\
         &\text{A1 Cost = 3, D4 Cost = 3} \\
         &\rightarrow \text{Push A1, D4 to PQ} \\\\
         &\text{PQ} = \left\{\begin{array}{l}
-            (D4, 3, 3, [B2, B4, A4]) \\
-            (C2, 3, 2, [B2, D2]), \\
-            (D1, 3, 2, [B2, D2]), \\
-            (B3, 3, 2, [B2, B4]), \\
-            (A3, \frac{13}{3}, 3, [B2, D2, D3]), \\
-            (C1, \frac{13}{3}, 3, [B2, B4, C4]), \\
-            (A1, 5, 3, [B2, B4, A4])
+            (v=D4, priority=3, cost=3, path=[B2, B4, A4]) \\
+            (v=C2, priority=3, cost=2, path=[B2, D2]), \\
+            (v=D1, priority=3, cost=2, path=[B2, D2]), \\
+            (v=B3, priority=3, cost=2, path=[B2, B4]), \\
+            (v=A3, priority=\frac{13}{3}, cost=3, path=[B2, D2, D3]), \\
+            (v=C1, priority=\frac{13}{3}, cost=3, path=[B2, B4, C4]), \\
+            (v=A1, priority=5, cost=3, path=[B2, B4, A4])
         \end{array}\right\}
     \end{align*}
 
     \par Step 7:
     \begin{align*}
-        &\rightarrow \text{Pop D4} \\
+        &\rightarrow \text{Pop D4} \quad (v=D4, priority=3, cost=3, path=[B2, B4, A4]) \\
         &\rightarrow \text{Goal is found!} \\
-        &\rightarrow \text{path = [B2, B4, A4, D4]}
+        &\rightarrow \text{Append v = D4 to path} \\
+        &\rightarrow \text{return path = [B2, B4, A4, D4]} \\
+        &\textcolor{red}{\textbf{Terminate Program}}
     \end{align*}
 
 \end{enumerate}
