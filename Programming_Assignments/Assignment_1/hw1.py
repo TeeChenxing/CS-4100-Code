@@ -13,7 +13,7 @@ from gridgame import *
 
 ##############################################################################################################################
 
-setup(GUI = False, render_delay_sec = 0.1, gs = 7)
+setup(GUI = True, render_delay_sec = 0.1, gs = 7)
 
 
 ##############################################################################################################################
@@ -40,7 +40,7 @@ setup(GUI = False, render_delay_sec = 0.1, gs = 7)
 ##############################################################################################################################
 
 grid, placedShapes, done = execute('export')
-#input()   # <-- workaround to prevent PyGame window from closing after execute() is called, for when GUI set to True. Uncomment to enable.
+input()   # <-- workaround to prevent PyGame window from closing after execute() is called, for when GUI set to True. Uncomment to enable.
 print(grid, placedShapes, done)
 
 
