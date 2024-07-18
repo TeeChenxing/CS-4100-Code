@@ -74,7 +74,7 @@ input()
 end = time.time()
 
 # Define the directory variable... MAKE SURE TO CHANGE BEFORE SUBMITTING TO GRADESCOPE
-assignment_dir = "Programming_Assignments/Assignment_1/data/"
+assignment_dir = "Programming_Assignments/Assignment_1/pa1_data/"
 
 # Save the grid to a text file
 np.savetxt(f'{assignment_dir}grid.txt', grid, fmt="%d")
