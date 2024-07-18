@@ -140,7 +140,8 @@ def refresh():
 
 
 def setup(GUI=True, render_delay_sec=0.1, gs=6):
-    global gridSize, screen, clock, grid, currentShapeIndex, currentColorIndex, shapePos, placedShapes, sleeptime
+    # add screenSize to globals
+    global gridSize, screen, clock, grid, currentShapeIndex, currentColorIndex, shapePos, placedShapes, sleeptime, screenSize
     gridSize = gs
     sleeptime = render_delay_sec
     grid = np.full((gridSize, gridSize), -1)
@@ -151,6 +152,7 @@ def setup(GUI=True, render_delay_sec=0.1, gs=6):
 
     if GUI:
         pygame.init()
+        screenSize = gridSize * cellSize # calculate screenSize
         screen = pygame.display.set_mode((screenSize, screenSize))
         pygame.display.set_caption("Shape Placement Grid")
         clock = pygame.time.Clock()
