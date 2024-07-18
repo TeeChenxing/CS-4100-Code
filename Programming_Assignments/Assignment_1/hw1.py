@@ -15,7 +15,6 @@ from gridgame import *
 
 setup(GUI = True, render_delay_sec = 0.1, gs = 7)
 
-
 ##############################################################################################################################
 
 # Initialization
@@ -40,10 +39,8 @@ setup(GUI = True, render_delay_sec = 0.1, gs = 7)
 ##############################################################################################################################
 
 grid, placedShapes, done = execute('export')
-input()   # <-- workaround to prevent PyGame window from closing after execute() is called, for when GUI set to True. Uncomment to enable.
+# input()   # <-- workaround to prevent PyGame window from closing after execute() is called, for when GUI set to True. Uncomment to enable.
 print(grid, placedShapes, done)
-
-
 
 ####################################################
 # Timing your code's execution for the leaderboard.
@@ -51,34 +48,22 @@ print(grid, placedShapes, done)
 
 start = time.time()  # <- do not modify this.
 
-
-
 ##########################################
 # Write all your code in the area below. 
 ##########################################
 
-
-
-
-
-
-
-
 '''
-
 YOUR CODE HERE
-
-
 '''
+grid, placedShapes, done = execute('p')
+print(grid, placedShapes, done)
 
+grid, placedShapes, done = execute('d')
+print(grid, placedShapes, done)
 
-
-
-
-
-
-
-
+grid, placedShapes, done = execute('p')
+print(grid, placedShapes, done)
+input()
 
 ########################################
 
@@ -86,10 +71,18 @@ YOUR CODE HERE
 
 ########################################
 
-end=time.time()
+end = time.time()
 
-np.savetxt('grid.txt', grid, fmt="%d")
-with open("shapes.txt", "w") as outfile:
+# Define the directory variable... MAKE SURE TO CHANGE BEFORE SUBMITTING TO GRADESCOPE
+assignment_dir = "Programming_Assignments/Assignment_1/data/"
+
+# Save the grid to a text file
+np.savetxt(f'{assignment_dir}grid.txt', grid, fmt="%d")
+
+# Save the placed shapes to a text file
+with open(f"{assignment_dir}shapes.txt", "w") as outfile:
     outfile.write(str(placedShapes))
-with open("time.txt", "w") as outfile:
+
+# Save the elapsed time to a text file
+with open(f"{assignment_dir}time.txt", "w") as outfile:
     outfile.write(str(end-start))
