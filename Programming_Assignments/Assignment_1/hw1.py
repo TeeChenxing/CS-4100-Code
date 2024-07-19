@@ -13,7 +13,7 @@ from gridgame import *
 
 ##############################################################################################################################
 
-setup(GUI = True, render_delay_sec = 0.1, gs = 7)
+setup(GUI = True, render_delay_sec = 0.0, gs = 8)
 
 ##############################################################################################################################
 
@@ -40,7 +40,6 @@ setup(GUI = True, render_delay_sec = 0.1, gs = 7)
 
 grid, placedShapes, done = execute('export')
 # input()   # <-- workaround to prevent PyGame window from closing after execute() is called, for when GUI set to True. Uncomment to enable.
-print(grid, placedShapes, done)
 
 ####################################################
 # Timing your code's execution for the leaderboard.
@@ -52,16 +51,56 @@ start = time.time()  # <- do not modify this.
 # Write all your code in the area below. 
 ##########################################
 
-'''
-YOUR CODE HERE
-'''
-grid, placedShapes, done = execute('p')
-print(grid, placedShapes, done)
+grid_size = len(grid)
+print(f"Grid Size: {grid_size}")
 
-grid, placedShapes, done = execute('d')
-print(grid, placedShapes, done)
+def pretty_print_movements(movements, line_length):
+    for i in range(0, len(movements), line_length):
+        print(movements[i:i + line_length])
 
-grid, placedShapes, done = execute('p')
+def grid_movement(grid_size):
+    movements = []
+    for current_row in range(grid_size - 1):
+        if (current_row % 2 == 0):
+           # Move right (grid_size - 1) times then move down
+            movements.extend(["right"] * (grid_size - 1)) 
+            movements.append("down")
+        else:
+            # Move left (grid_size - 1) times then move down
+            movements.extend(["left"] * (grid_size - 1))  
+            movements.append("down")
+
+    # deal with last row of the grid
+    if ((grid_size - 1) % 2 == 0):
+        movements.extend(["right"] * (grid_size - 1))
+    else:
+        movements.extend(["left"] * (grid_size - 1))
+
+    return movements
+
+def create_default_action_list(movements, grid_size):
+    placements = ["place"] * (grid_size ** 2)
+    colors = ["switchcolor"] * (grid_size ** 2)
+    
+    action = []
+    index = 0
+    
+    for i in range(len(placements)):
+        action.append(placements[i])
+        if index < len(movements):
+            action.append(movements[index])
+            action.append(colors[index])
+            index += 1
+    
+    return action
+
+movements = grid_movement(grid_size)
+default_actions = create_default_action_list(movements, grid_size)
+print(default_actions)
+
+for action in default_actions:
+    grid, placedShapes, done = execute(action)
+
 print(grid, placedShapes, done)
 input()
 

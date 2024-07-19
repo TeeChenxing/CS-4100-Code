@@ -14,9 +14,8 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 
 # Colors for the shapes
-colors = ['#988BD0', '#504136', '#457F6E', '#F7C59F']  # Indigo, Taupe, Viridian, Peach
-
-colorIdxToName = {0: "Indigo", 1: "Taupe", 2: "Viridian", 3: "Peach"}
+colors = ['#988BD0', '#F7C59F']  # Indigo, Taupe, Viridian, Peach
+colorIdxToName = {0: "Indigo", 1: "Viridian"}
 
 # Shapes
 shapes = [
@@ -328,7 +327,7 @@ def printGridState(grid):
 def main():
     #print("Select mode: 1 for GUI, 2 for Terminal")
     #mode = input("Mode: ").strip()
-    setup(True, render_delay_sec=0.1, gs=6)
+    setup(True, render_delay_sec=0.1, gs=2)
     loop_gui()
     # if mode == '1':
     #     loop_gui()
