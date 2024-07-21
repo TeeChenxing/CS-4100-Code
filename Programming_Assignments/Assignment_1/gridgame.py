@@ -327,7 +327,7 @@ def printGridState(grid):
 def main():
     #print("Select mode: 1 for GUI, 2 for Terminal")
     #mode = input("Mode: ").strip()
-    setup(True, render_delay_sec=0.1, gs=2)
+    setup(True, render_delay_sec=0.0, gs=5)
     loop_gui()
     # if mode == '1':
     #     loop_gui()

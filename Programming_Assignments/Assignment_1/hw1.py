@@ -1,5 +1,7 @@
 import time
 import numpy as np
+import copy
+import random
 from gridgame import *
 
 ##############################################################################################################################
@@ -13,7 +15,7 @@ from gridgame import *
 
 ##############################################################################################################################
 
-setup(GUI = True, render_delay_sec = 0.0, gs = 8)
+grid_size = 7
 
 ##############################################################################################################################
 
@@ -38,7 +40,6 @@ setup(GUI = True, render_delay_sec = 0.0, gs = 8)
 
 ##############################################################################################################################
 
-grid, placedShapes, done = execute('export')
 # input()   # <-- workaround to prevent PyGame window from closing after execute() is called, for when GUI set to True. Uncomment to enable.
 
 ####################################################
@@ -51,12 +52,30 @@ start = time.time()  # <- do not modify this.
 # Write all your code in the area below. 
 ##########################################
 
-grid_size = len(grid)
 print(f"Grid Size: {grid_size}")
 
-def pretty_print_movements(movements, line_length):
-    for i in range(0, len(movements), line_length):
-        print(movements[i:i + line_length])
+def evaluator1(action_list):
+    for cell_action in action_list:
+        for action in cell_action:
+            g, ps, d = execute(action) 
+
+    return g, ps, d
+
+
+def evaluator2(action_list):
+    for action in action_list:
+        g, ps, d = execute(action) 
+
+    return g, ps, d
+
+
+def pretty_print_actions(action_list):
+    cell_count = 1
+    for cell_action in action_list:
+        print(f"Cell {cell_count}: {cell_action}")
+        print()
+        cell_count += 1
+
 
 def grid_movement(grid_size):
     movements = []
@@ -78,6 +97,7 @@ def grid_movement(grid_size):
 
     return movements
 
+
 def create_default_action_list(movements, grid_size):
     placements = ["place"] * (grid_size ** 2)
     colors = ["switchcolor"] * (grid_size ** 2)
@@ -86,23 +106,141 @@ def create_default_action_list(movements, grid_size):
     index = 0
     
     for i in range(len(placements)):
-        action.append(placements[i])
+        temp = []
+        temp.append(placements[i])
         if index < len(movements):
-            action.append(movements[index])
-            action.append(colors[index])
+            temp.append(movements[index])
+            temp.append(colors[index])
             index += 1
+        
+        action.append(temp)
     
     return action
 
+
+def move_back_sequence(size):
+    move_back_to_beginning = ['up'] * size
+    if size % 2 != 0:
+        move_back_to_beginning += ['left'] * size
+    else:
+        move_back_to_beginning.append('switchcolor')
+    return move_back_to_beginning
+
+
+def generate_random_solution(action_list):
+    all_actions = []
+    move_back = move_back_sequence(grid_size)
+
+    num_of_shapes = 9
+    last_g, last_ps, last_d = None, None, None
+
+    # Valid Shapes
+    valid_shapes_1 = [3, 5] 
+    valid_shapes_2 = [1, 8]
+    valid_shapes_3 = [0]
+
+    action_list_copy_1 = copy.deepcopy(action_list)
+    for cell_action in action_list_copy_1:
+        random_shape = random.choice(valid_shapes_1)  # Choose a random number from valid_shapes_1
+        switchshape_list = ['switchshape'] * random_shape  # Create a list with 'switchshape' repeated random_number times
+
+        # Insert the switchshape_list at the beginning of the cell_action
+        cell_action[0:0] = switchshape_list
+
+        # Make sure we switch shapes again to get back to the first shape
+        if random_shape != 0:
+            reset_list = ['switchshape'] * (num_of_shapes - random_shape)
+            insert_index = random_shape + 1
+            cell_action[insert_index:insert_index] = reset_list  # Append the reset_list after "place"
+
+        # grid, placedShapes, done
+        evaluator2(cell_action)
+
+    all_actions.append(action_list_copy_1)
+
+    evaluator2(move_back)
+    all_actions.append(move_back)
+
+    action_list_copy_2 = copy.deepcopy(action_list)
+    for cell_action in action_list_copy_2:
+        random_shape = random.choice(valid_shapes_2)  # Choose a random number from valid_shapes_3
+        switchshape_list = ['switchshape'] * random_shape  # Create a list with 'switchshape' repeated random_number times
+
+        # Insert the switchshape_list at the beginning of the cell_action
+        cell_action[0:0] = switchshape_list
+
+        # Make sure we switch shapes again to get back to the first shape
+        if random_shape != 0:
+            reset_list = ['switchshape'] * (num_of_shapes - random_shape)
+            insert_index = random_shape + 1
+            cell_action[insert_index:insert_index] = reset_list  # Append the reset_list after "place"
+
+        # grid, placedShapes, done
+        evaluator2(cell_action)
+
+    all_actions.append(action_list_copy_2)
+
+    evaluator2(move_back)
+    all_actions.append(move_back)
+
+    action_list_copy_3 = copy.deepcopy(action_list)
+    for cell_action in action_list_copy_3:
+        random_shape = random.choice(valid_shapes_3)  # Choose a random number from valid_shapes_3
+        switchshape_list = ['switchshape'] * random_shape  # Create a list with 'switchshape' repeated random_number times
+
+        # Insert the switchshape_list at the beginning of the cell_action
+        cell_action[0:0] = switchshape_list
+
+        # Make sure we switch shapes again to get back to the first shape
+        if random_shape != 0:
+            reset_list = ['switchshape'] * (num_of_shapes - random_shape)
+            insert_index = random_shape + 1
+            cell_action[insert_index:insert_index] = reset_list  # Append the reset_list after "place"
+
+        # grid, placedShapes, done
+        g, ps, d = evaluator2(cell_action)
+
+        last_g, last_ps, last_d = g, ps, d
+
+    all_actions.append(action_list_copy_3)
+
+    return last_g, last_ps, last_d, all_actions
+    
 movements = grid_movement(grid_size)
 default_actions = create_default_action_list(movements, grid_size)
-print(default_actions)
 
-for action in default_actions:
-    grid, placedShapes, done = execute(action)
+# setup(GUI=False, render_delay_sec=0.0, gs=grid_size)
+# grid, placedShapes, done, all_actions = generate_random_solution(default_actions)
 
-print(grid, placedShapes, done)
-input()
+# print(all_actions[4])
+# print(grid, placedShapes, done)
+
+# print(len(all_actions))
+
+# Initialize variables to store the desired g and ps
+results = []
+for i in range(10):
+    setup(GUI=False, render_delay_sec=0.0, gs=grid_size)
+    execute('export')
+    g, ps, d, a = generate_random_solution(default_actions)
+    
+    # Store the values in the list
+    results.append((g, ps, d, a))
+
+# Initialize variables to None
+grid, placedShapes, done, actions = None, None, None, None 
+
+# Iterate through the results to find the first tuple where d is True
+for g, ps, d, a in results:
+    if d:
+        grid, placedShapes, done, actions = g, ps, d, a
+        break
+
+# Print the selected tuple
+print("Selected grid:", grid)
+print("Selected placedShapes:", placedShapes)
+print("Selected done:", done)
+print("Selected Actions: ", actions)
 
 ########################################
 
@@ -112,16 +250,13 @@ input()
 
 end = time.time()
 
-# Define the directory variable... MAKE SURE TO CHANGE BEFORE SUBMITTING TO GRADESCOPE
-assignment_dir = "Programming_Assignments/Assignment_1/pa1_data/"
-
 # Save the grid to a text file
-np.savetxt(f'{assignment_dir}grid.txt', grid, fmt="%d")
+np.savetxt(f'grid.txt', grid, fmt="%d")
 
 # Save the placed shapes to a text file
-with open(f"{assignment_dir}shapes.txt", "w") as outfile:
+with open(f"shapes.txt", "w") as outfile:
     outfile.write(str(placedShapes))
 
 # Save the elapsed time to a text file
-with open(f"{assignment_dir}time.txt", "w") as outfile:
+with open(f"time.txt", "w") as outfile:
     outfile.write(str(end-start))
