@@ -66,14 +66,6 @@ def execute_instructions(action_list):
     return g, ps, d
 
 
-def pretty_print_actions(action_list):#
-    cell_count = 1
-    for cell_action in action_list:
-        print(f"Cell {cell_count}: {cell_action}")
-        print()
-        cell_count += 1
-
-
 def grid_movement(grid_size):
     movements = []
     for current_row in range(grid_size - 1):
@@ -144,35 +136,63 @@ def choose_shape_sequence(action_list, valid_shapes):
 
 
 def generate_random_solution(action_list, evolution_shard, iteration):
-    # Which part to add to the evolution shard
-    add_periods = [[0, 1, 2, 3, 4], [2, 3, 4], [4]]
-
     # Valid Shapes
     valid_shapes = [[3, 5], [1, 8], [0]]
-
-    all_actions = []
     move_back = move_back_sequence(grid_size)
 
-    sequence_1 = choose_shape_sequence(action_list, valid_shapes[0])
-    all_actions.append(sequence_1)
-    all_actions.append(move_back)
+    if iteration == 0:
+        all_actions = []
 
-    sequence_2 = choose_shape_sequence(action_list, valid_shapes[1])
-    all_actions.append(sequence_2)
-    all_actions.append(move_back)
+        sequence_1 = choose_shape_sequence(action_list, valid_shapes[0])
+        all_actions.append(sequence_1)
+        all_actions.append(move_back)
 
-    sequence_3 = choose_shape_sequence(action_list, valid_shapes[2])
-    all_actions.append(sequence_3)
+        sequence_2 = choose_shape_sequence(action_list, valid_shapes[1])
+        all_actions.append(sequence_2)
+        all_actions.append(move_back)
 
-    # 3-D list
-    trimmed_actions = [all_actions[i] for i in add_periods[iteration] if i < len(all_actions)]
+        sequence_3 = choose_shape_sequence(action_list, valid_shapes[2])
+        all_actions.append(sequence_3)
 
-    for sequence in trimmed_actions:
-        evolution_shard.append(sequence)
+        last_g, last_ps, last_d = execute_instructions(all_actions)
 
-    last_g, last_ps, last_d = execute_instructions(evolution_shard)
+        return last_g, last_ps, last_d, all_actions
+    
+    elif iteration == 1:
+        all_actions = []
 
-    return last_g, last_ps, last_d, evolution_shard
+        all_actions.append(evolution_shard[0])
+        all_actions.append(evolution_shard[1])
+
+        sequence_2 = choose_shape_sequence(action_list, valid_shapes[1])
+        all_actions.append(sequence_2)
+        all_actions.append(move_back)
+
+        sequence_3 = choose_shape_sequence(action_list, valid_shapes[2])
+        all_actions.append(sequence_3)
+
+        last_g, last_ps, last_d = execute_instructions(all_actions)
+
+        return last_g, last_ps, last_d, all_actions
+    
+    elif iteration == 2:
+        all_actions = []
+
+        all_actions.append(evolution_shard[0])
+        all_actions.append(evolution_shard[1])
+        all_actions.append(evolution_shard[2])
+        all_actions.append(evolution_shard[3])
+
+        sequence_3 = choose_shape_sequence(action_list, valid_shapes[2])
+        all_actions.append(sequence_3)
+
+        last_g, last_ps, last_d = execute_instructions(all_actions)
+
+        return last_g, last_ps, last_d, all_actions
+    
+    else:
+        print("Error")
+        return None
     
 
 def genetic_algorithm(num_of_solutions, default_actions):
@@ -184,16 +204,15 @@ def genetic_algorithm(num_of_solutions, default_actions):
         for _ in range(num_of_solutions):
             setup(GUI=False, render_delay_sec=0.0, gs=grid_size)
             execute('export')
-            g, ps, d, a = generate_random_solution(default_actions, shard, i)
-            
-            # Store the values in the list only if d is True
-            if d:
-                results.append((g, ps, d, a))
 
+            g, ps, d, a = generate_random_solution(default_actions, shard, i)
+            results.append((g, ps, d, a))
+        
         best_solution = min(results, key=lambda x: len(x[1]))
         best_solution_actions = best_solution[3]
         
         indices_to_keep = keep_periods[i]
+        # Keep part of the solution and mutate the rest
         shard = [best_solution_actions[i] for i in indices_to_keep]
 
     return best_solution
@@ -202,13 +221,19 @@ def genetic_algorithm(num_of_solutions, default_actions):
 def main():
     movements = grid_movement(grid_size)
     default_actions = create_default_action_list(movements, grid_size)
-    best_solution = genetic_algorithm(100, default_actions)
+    best_solution = genetic_algorithm(1000, default_actions)
 
     grid = best_solution[0]
     placedShapes = best_solution[1]
+    print(f"Number of Shapes Used: {len(placedShapes)}")
 
-    print(len(placedShapes))
+    actions = best_solution[3]
+    file_path = 'Programming_Assignments/Assignment_1/actions.json'
 
+    # Write the list to a JSON file
+    with open(file_path, 'w') as json_file:
+        json.dump(actions, json_file)
+        
     # ########################################
     # # Do not modify any of the code below. 
     # ########################################
