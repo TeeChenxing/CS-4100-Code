@@ -221,7 +221,7 @@ def genetic_algorithm(num_of_solutions, default_actions):
 def main():
     movements = grid_movement(grid_size)
     default_actions = create_default_action_list(movements, grid_size)
-    best_solution = genetic_algorithm(1000, default_actions)
+    best_solution = genetic_algorithm(100, default_actions)
 
     grid = best_solution[0]
     placedShapes = best_solution[1]
