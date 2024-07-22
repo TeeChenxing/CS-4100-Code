@@ -2,6 +2,7 @@ import time
 import numpy as np
 import copy
 import random
+import json
 from gridgame import *
 
 ##############################################################################################################################
@@ -16,6 +17,7 @@ from gridgame import *
 ##############################################################################################################################
 
 grid_size = 7
+num_of_shapes = 9
 
 ##############################################################################################################################
 
@@ -52,24 +54,19 @@ start = time.time()  # <- do not modify this.
 # Write all your code in the area below. 
 ##########################################
 
-print(f"Grid Size: {grid_size}")
-
-def evaluator1(action_list):
-    for cell_action in action_list:
-        for action in cell_action:
-            g, ps, d = execute(action) 
-
-    return g, ps, d
-
-
-def evaluator2(action_list):
-    for action in action_list:
-        g, ps, d = execute(action) 
+def execute_instructions(action_list):
+    # can execute instructions on lists of any depth (1D, 2D, 3D, etc)
+    if isinstance(action_list[0], list):
+        for sublist in action_list:
+            g, ps, d = execute_instructions(sublist)
+    else:
+        for action in action_list:
+            g, ps, d = execute(action)
 
     return g, ps, d
 
 
-def pretty_print_actions(action_list):
+def pretty_print_actions(action_list):#
     cell_count = 1
     for cell_action in action_list:
         print(f"Cell {cell_count}: {cell_action}")
@@ -124,139 +121,110 @@ def move_back_sequence(size):
         move_back_to_beginning += ['left'] * size
     else:
         move_back_to_beginning.append('switchcolor')
-    return move_back_to_beginning
+    return [move_back_to_beginning]
 
 
-def generate_random_solution(action_list):
+def choose_shape_sequence(action_list, valid_shapes):
+    action_list_copy = copy.deepcopy(action_list)
+
+    for cell_action in action_list_copy:
+        random_shape = random.choice(valid_shapes)  # Choose a random number from valid_shapes_1
+        switchshape_list = ['switchshape'] * random_shape  # Create a list with 'switchshape' repeated random_number times
+
+        # Insert the switchshape_list at the beginning of the cell_action
+        cell_action[0:0] = switchshape_list
+
+        # Make sure we switch shapes again to get back to the first shape
+        if random_shape != 0:
+            reset_list = ['switchshape'] * (num_of_shapes - random_shape)
+            insert_index = random_shape + 1
+            cell_action[insert_index:insert_index] = reset_list  # Append the reset_list after "place"
+
+    return action_list_copy
+
+
+def generate_random_solution(action_list, evolution_shard, iteration):
+    # Which part to add to the evolution shard
+    add_periods = [[0, 1, 2, 3, 4], [2, 3, 4], [4]]
+
+    # Valid Shapes
+    valid_shapes = [[3, 5], [1, 8], [0]]
+
     all_actions = []
     move_back = move_back_sequence(grid_size)
 
-    num_of_shapes = 9
-    last_g, last_ps, last_d = None, None, None
-
-    # Valid Shapes
-    valid_shapes_1 = [3, 5] 
-    valid_shapes_2 = [1, 8]
-    valid_shapes_3 = [0]
-
-    action_list_copy_1 = copy.deepcopy(action_list)
-    for cell_action in action_list_copy_1:
-        random_shape = random.choice(valid_shapes_1)  # Choose a random number from valid_shapes_1
-        switchshape_list = ['switchshape'] * random_shape  # Create a list with 'switchshape' repeated random_number times
-
-        # Insert the switchshape_list at the beginning of the cell_action
-        cell_action[0:0] = switchshape_list
-
-        # Make sure we switch shapes again to get back to the first shape
-        if random_shape != 0:
-            reset_list = ['switchshape'] * (num_of_shapes - random_shape)
-            insert_index = random_shape + 1
-            cell_action[insert_index:insert_index] = reset_list  # Append the reset_list after "place"
-
-        # grid, placedShapes, done
-        evaluator2(cell_action)
-
-    all_actions.append(action_list_copy_1)
-
-    evaluator2(move_back)
+    sequence_1 = choose_shape_sequence(action_list, valid_shapes[0])
+    all_actions.append(sequence_1)
     all_actions.append(move_back)
 
-    action_list_copy_2 = copy.deepcopy(action_list)
-    for cell_action in action_list_copy_2:
-        random_shape = random.choice(valid_shapes_2)  # Choose a random number from valid_shapes_3
-        switchshape_list = ['switchshape'] * random_shape  # Create a list with 'switchshape' repeated random_number times
-
-        # Insert the switchshape_list at the beginning of the cell_action
-        cell_action[0:0] = switchshape_list
-
-        # Make sure we switch shapes again to get back to the first shape
-        if random_shape != 0:
-            reset_list = ['switchshape'] * (num_of_shapes - random_shape)
-            insert_index = random_shape + 1
-            cell_action[insert_index:insert_index] = reset_list  # Append the reset_list after "place"
-
-        # grid, placedShapes, done
-        evaluator2(cell_action)
-
-    all_actions.append(action_list_copy_2)
-
-    evaluator2(move_back)
+    sequence_2 = choose_shape_sequence(action_list, valid_shapes[1])
+    all_actions.append(sequence_2)
     all_actions.append(move_back)
 
-    action_list_copy_3 = copy.deepcopy(action_list)
-    for cell_action in action_list_copy_3:
-        random_shape = random.choice(valid_shapes_3)  # Choose a random number from valid_shapes_3
-        switchshape_list = ['switchshape'] * random_shape  # Create a list with 'switchshape' repeated random_number times
+    sequence_3 = choose_shape_sequence(action_list, valid_shapes[2])
+    all_actions.append(sequence_3)
 
-        # Insert the switchshape_list at the beginning of the cell_action
-        cell_action[0:0] = switchshape_list
+    # 3-D list
+    trimmed_actions = [all_actions[i] for i in add_periods[iteration] if i < len(all_actions)]
 
-        # Make sure we switch shapes again to get back to the first shape
-        if random_shape != 0:
-            reset_list = ['switchshape'] * (num_of_shapes - random_shape)
-            insert_index = random_shape + 1
-            cell_action[insert_index:insert_index] = reset_list  # Append the reset_list after "place"
+    for sequence in trimmed_actions:
+        evolution_shard.append(sequence)
 
-        # grid, placedShapes, done
-        g, ps, d = evaluator2(cell_action)
+    last_g, last_ps, last_d = execute_instructions(evolution_shard)
 
-        last_g, last_ps, last_d = g, ps, d
-
-    all_actions.append(action_list_copy_3)
-
-    return last_g, last_ps, last_d, all_actions
+    return last_g, last_ps, last_d, evolution_shard
     
-movements = grid_movement(grid_size)
-default_actions = create_default_action_list(movements, grid_size)
 
-# setup(GUI=False, render_delay_sec=0.0, gs=grid_size)
-# grid, placedShapes, done, all_actions = generate_random_solution(default_actions)
+def genetic_algorithm(num_of_solutions, default_actions):
+    shard = []
+    keep_periods = [[0, 1], [0, 1, 2, 3], [0, 1, 2, 3, 4]]
 
-# print(all_actions[4])
-# print(grid, placedShapes, done)
+    results = []
+    for i in range(3): 
+        for _ in range(num_of_solutions):
+            setup(GUI=False, render_delay_sec=0.0, gs=grid_size)
+            execute('export')
+            g, ps, d, a = generate_random_solution(default_actions, shard, i)
+            
+            # Store the values in the list only if d is True
+            if d:
+                results.append((g, ps, d, a))
 
-# print(len(all_actions))
+        best_solution = min(results, key=lambda x: len(x[1]))
+        best_solution_actions = best_solution[3]
+        
+        indices_to_keep = keep_periods[i]
+        shard = [best_solution_actions[i] for i in indices_to_keep]
 
-# Initialize variables to store the desired g and ps
-results = []
-for i in range(10):
-    setup(GUI=False, render_delay_sec=0.0, gs=grid_size)
-    execute('export')
-    g, ps, d, a = generate_random_solution(default_actions)
-    
-    # Store the values in the list
-    results.append((g, ps, d, a))
+    return best_solution
 
-# Initialize variables to None
-grid, placedShapes, done, actions = None, None, None, None 
 
-# Iterate through the results to find the first tuple where d is True
-for g, ps, d, a in results:
-    if d:
-        grid, placedShapes, done, actions = g, ps, d, a
-        break
+def main():
+    movements = grid_movement(grid_size)
+    default_actions = create_default_action_list(movements, grid_size)
+    best_solution = genetic_algorithm(100, default_actions)
 
-# Print the selected tuple
-print("Selected grid:", grid)
-print("Selected placedShapes:", placedShapes)
-print("Selected done:", done)
-print("Selected Actions: ", actions)
+    grid = best_solution[0]
+    placedShapes = best_solution[1]
 
-########################################
+    print(len(placedShapes))
 
-# Do not modify any of the code below. 
+    # ########################################
+    # # Do not modify any of the code below. 
+    # ########################################
 
-########################################
+    end = time.time()
 
-end = time.time()
+    # Save the grid to a text file
+    np.savetxt(f'grid.txt', grid, fmt="%d")
 
-# Save the grid to a text file
-np.savetxt(f'grid.txt', grid, fmt="%d")
+    # Save the placed shapes to a text file
+    with open(f"shapes.txt", "w") as outfile:
+        outfile.write(str(placedShapes))
 
-# Save the placed shapes to a text file
-with open(f"shapes.txt", "w") as outfile:
-    outfile.write(str(placedShapes))
+    # Save the elapsed time to a text file
+    with open(f"time.txt", "w") as outfile:
+        outfile.write(str(end-start))
 
-# Save the elapsed time to a text file
-with open(f"time.txt", "w") as outfile:
-    outfile.write(str(end-start))
+if __name__ == "__main__":
+    main()

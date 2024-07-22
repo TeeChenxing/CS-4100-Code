@@ -4,6 +4,7 @@
 *.log
 *.out
 *.gz
+*.json
 
 __pycache__/
 Submission/
