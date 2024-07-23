@@ -62,6 +62,7 @@ Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \hr
 
 \begin{enumerate}[start=1,label=Q\arabic*,left=0pt]
     \item \textbf{Under what (implementation-related) assumptions is maze-solving a fully observable environment? What are the agent’s percepts?}
+    
     \par We would assume that the agent is able to have all the information regarding the maze environment to be able to determine if the maze
     is fully observable. 
     This would include the complete maze layout like the ways it can traverse, the walls, the starting position, and the exit position.
@@ -74,6 +75,7 @@ Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \hr
     \end{itemize}
     
     \item \textbf{Under what (implementation-related) assumptions is maze-solving a partially observable environment? What are the agent’s percepts?}
+    
     \par A maze is partially observable if the agent has limited information. This would mean that the agent
     will not have all the information regarding the maze like all the walls and the ways it can traverse. Therefore,
     the agent's percept would be:
@@ -85,11 +87,13 @@ Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \hr
     \end{itemize}
     
     \item \textbf{Is a known environment always fully observable? Explain with an example.}
+    
     \par No, consider the game of solitaire. The agent knows the rules of this environment where in this case would be the rules
     of the card game making it a known environment. However, it is only partially observable since the agent will not know which card will
     appear next because this information is hidden.
     
     \item \textbf{Is a partially observable environment always an unknown environment? Explain with an example.}
+    
     \par No, consider an agent that delivers coffee within Google's headquarter. The agent has general information about the office building,
     like the number of floors, elevator locations etc. This environment is only partially observable because the agent has limited visibility due to
     its visual, and auditory sensors. 
@@ -99,6 +103,7 @@ Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \hr
     utilizing elevators to move up/down floors etc.
 
     \item \textbf{What is the difference between an unknown environment and a non-deterministic environment? Explain with an example.}
+    
     \par An unknown environment is one where we do not know the rules. In a non-deterministic environment, there is the factor of randomness/uncertainty. A good example
     of this is to visualize a drone visiting an unexplored alien planet with the goal of finding life. This is an unknown environment since we do not have any prior maps or information 
     about this planet. 
@@ -131,6 +136,7 @@ search algorithms we covered in class.
 
 \begin{enumerate}[start=6,label=Q\arabic*,left=0pt]
     \item \textbf{Can both Breadth-First Search (BFS) and Depth-First Search (DFS) be used to solve RJMs? Will both yield the shortest path?}
+    
     \par Yes, BFS and DFS can be used to solve RJMs. This is because we can turn a RJM into an unweighted graph which BFS and DFS 
     can be used for. 
     
@@ -381,11 +387,13 @@ shot. He lets the machine control the following values:
 
 \begin{enumerate}[start=9,label=Q\arabic*,left=0pt]
     \item \textbf{Based on our discussions in class, is this problem well-suited to local search algorithms? Explain your reasoning.}
+    
     \par This problem aims to learn the user’s preferences to create the most optimal coffee mix tailored to the user. 
     In other words, the focus is on the final solution rather than the specific optimizations or paths taken to achieve the perfect mix. 
     Conveniently, local search algorithms are designed for this type of problem, making them well-suited for finding the ideal solution.
     
     \item \textbf{How you would implement such a program? What would be a reasonable objective function? (This question is somewhat open-ended, so don’t worry too much about the ‘right’ answer. I am really looking for whether your thought process reflects a solid understanding of how local search works.)}
+    
     \par I would use a hill-climbing algorithm. I would define the objective function to be based on user feedback.
     Lets say for each cup of coffee this machine brews, the user rates the coffee from 1 to 10 where 10 would mean perfect.
     The objection function $f(x)$ would try to maximize the user rating. However, if we want to use gradient descent, we can manipulate the 
@@ -405,6 +413,7 @@ shot. He lets the machine control the following values:
     to find the optimal coffee blend.
 
     \item \textbf{Which of the optimizations and local search variants discussed in class (random restarts, varying step size, simulated annealing and genetic algorithms) are applicable to this problem, and why?}
+    
     \par All 4 techniques are applicable to this solution. For random restarts, lets assume we are trying to minimize the objective
     function, the optimization algorithm we are using may get stuck inside a valley which may not be the global minimum. By using random
     restarts, we will be able to move to a different spot and hopefully find a better minimum.
@@ -424,7 +433,9 @@ shot. He lets the machine control the following values:
 \section{Adversarial Search}
 
 \begin{enumerate}[start=12,label=Q\arabic*,left=0pt]
-    \item \textbf{Construct a game tree example with a depth of 4 and a branching factor of 2, that illustrates the best-case for alpha-beta pruning, except for the trivial solution. Hand drawn figures accepted for this question, but please ensure clarity.}
+    \item \textbf{Construct a game tree example with a depth of 4 and a branching factor of 2, that illustrates the best-case for alpha-beta pruning, except for the trivial solution. Hand drawn figures accepted for this question, but please ensure clarity. 
+    (Here's some inspiration: \href{https://science.slc.edu/~jmarshall/courses/2005/fall/cs151/lectures/minimax/BestCase.html}{CS151, 2005. Jim Marshall, SLC})}    
+    
     \begin{figure}[H]
         \centering  
         \includegraphics[height=0.2\textheight]{Q12_tree.png}
@@ -432,6 +443,7 @@ shot. He lets the machine control the following values:
     \end{figure}
 
     \item \textbf{Why is it desirable to combine iterative deepening with alpha-beta pruning from a practical standpoint?}
+    
     \par Combining Iterative Deepening Search (IDS) with Alpha-Beta Pruning (ABP) is desirable because it combines the strengths 
     of both techniques to enhance search efficiency. IDS performs depth-limited searches iteratively, where the algorithm explores 
     progressively deeper levels while using low memory usage, similar to Depth-First Search (DFS). 
@@ -445,11 +457,13 @@ shot. He lets the machine control the following values:
 
 \begin{enumerate}[start=14,label=Q\arabic*,left=0pt]
     \item \textbf{Review, and copy/paste the academic integrity acknowledgement in your final submission as the answer to Q14.}
+    
     \par I have read and understood the academic integrity policy as outlined in the course syllabus for CS4100. 
     By pasting this acknowledgement in my submission, I declare that all work presented here is my own, 
     and any conceptual discussions I may have had with classmates have been fully disclosed. I declare that generative AI 
     was not used to answer any questions in this assignment. Any use of generative AI to improve writing clarity 
     alone is accompanied by an appendix with my original, unedited answers.
+
 \end{enumerate}
 \end{sloppypar}
 

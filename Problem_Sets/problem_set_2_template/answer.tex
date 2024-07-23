@@ -1,0 +1,201 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{floatrow}
+\usepackage{layout}
+\usepackage{amssymb} 
+\usepackage{multirow}
+\usepackage{caption}
+\geometry{margin=1in}
+\usepackage{authblk}
+\usepackage{indentfirst}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{titlesec}
+
+% Define link color
+\hypersetup{
+    colorlinks=true,
+    linkcolor=teal,  % Color for internal links
+    filecolor=teal,  % Color for file links
+    urlcolor=teal,   % Color for URLs
+    citecolor=black  % Color for citation links
+}
+
+% Define custom dark teal color
+\definecolor{darkteal}{RGB}{0, 102, 102} % Adjust the RGB values as needed
+
+% Define section color
+\titleformat{\section}
+  {\color{darkteal}\normalfont\Large\bfseries} % Formatting for section titles
+  {\thesection}{1em}{}
+
+\providecommand{\keywords}[1]
+{
+  \small	
+  \textbf{\; \textit{Keywords---}} #1
+}
+
+\begin{document}
+
+\title{\textbf{\huge{Problem Set 2}}}
+
+\author{\textbf\large{Teera Tesharojanasup}}
+
+\affil{\textbf{Northeastern University, Boston}}
+
+\date{\text{July 23rd, 2024}}
+
+\maketitle
+\begin{sloppypar}
+
+\section*{Overview}
+
+Problem set 2 for CS 4100 Summer II. Taught by assistant teaching professor, \href{https://rajagopalvenkat.com/}{Rajagopal Venkat}. \cite{MISC:1}
+
+\section{Markov Models}
+
+\par Consider the following Markov model with 3 states, \textbf{S1}, \textbf{S2} and \textbf{S3}. The transition probabilities of the model are 
+represented along the edges (note that each edge is directional).
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[height=0.2\textheight]{markov_model.png}
+    \label{fig:markov_model}
+\end{figure}
+
+\begin{enumerate}[start=1,label=Q\arabic*,left=0pt]
+    \item \textbf{Given the above Markov model, explain whether the stationary distribution depends on the start state (without actually computing the stationary distribution).}
+    
+    \par 
+    
+    \item \textbf{Given the initial probability distribution} $p_0 = [0.1, 0.6, 0.3]$ \textbf{for states} $S1, S2,$ \textbf{and} $S3$ \textbf{respectively, compute the stationary distribution for the given Markov model. You may use a program to do the computations. Report only the final stationary distribution} ${\pi}$.
+
+    \par 
+    
+    \item \textbf{What is the probability of the following transition sequence: $S1 \rightarrow S1 \rightarrow S2 \rightarrow S3?$ (Use the stationary distribution computed above, and show your calculations.)}
+    
+    \par 
+    
+    \item \textbf{Given that we start in the state $S2$, what is the probability of returning to $S2$ after two transitions? (Show your calculations.)}
+    
+    \par 
+
+    \item \textbf{Given the starting probability distribution $p_0 = [0.1, 0.6, 0.3]$, what is the probability of ending up in $S2$ after exactly two transitions? (Show your calculations.)}
+    
+    \par 
+
+\end{enumerate}
+
+\section{Hidden Markov Models}
+
+Recall Hidden Markov Models (HMM) from class, where we applied this approach to sequence 
+labeling tasks such as parts-of-speech tagging or named entity recognition. Here,
+your task is to construct and use an HMM model to make inferences about a coin-flipping
+game with the following rules. \\
+
+\noindent Your professor produces two identical looking coins. However, only one of the coins is a
+fair coin, and the other is a biased coin that produces an outcome of \textbf{Heads} 70\% of the
+time. The professor always knows which coin is the fair one, and will perform three coin
+flips in total. Between each flip, the professor may swap the coin, following the rule that
+if a fair coin is flipped in one round, then in the next round, the professor chooses a coin
+completely at random. If, however, the biased coin is flipped in any round, then the professor 
+is twice as likely to choose the biased coin again in the next round, as compared to
+the fair coin. As the three flips are performed, you observe the outcomes \textbf{Heads}, \textbf{Heads}
+and \textbf{Tails} respectively.
+
+
+\begin{enumerate}[start=6,label=Q\arabic*,left=0pt]
+    \item \textbf{Draw the HMM diagram for this game showing transitions between hidden states,
+    and emissions to outcomes with the corresponding probabilities labeled along the edges.
+    Hand-drawn figures accepted for this question, provided the grader can read everything
+    clearly. (For reference, see \href{https://rajagopalvenkat.com/teaching/resources/AI/ch6.html\#hmm}{the second diagram in our HMM notes}, showing the Very Late,
+    Late and On Time hidden states, and the Happy and Sad outcomes.)}
+
+    \par
+
+    \item \textbf{Given the observed outcome sequence, predict which coin was most likely flipped
+    in each of the three turns (i.e., compute the most likely hidden sequence). Show all your
+    intermediate calculations and use the stationary distribution to reason about which coin
+    was flipped in the very first round.}
+
+    \par 
+
+\end{enumerate}
+
+\section{Markov Decision Processes and Reinforcement Learning}
+
+Consider the following MDP with 4 states, and 4 actions. A dashed line represents a
+transition from a chosen action to some next state. Transition probabilities are specified
+along each dashed edge.
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[height=0.3\textheight]{mdp_and_rl.png}
+    \label{fig:mdp_and_rl}
+\end{figure}
+
+\begin{enumerate}[start=8,label=Q\arabic*,left=0pt]
+    \item \textbf{How many unique policies does this MDP have? Explain your reasoning and list all policies. Use $X$ to indicate no possible action from a state.}
+    
+    \par 
+    
+    \item \textbf{If from any state, all valid actions are equally likely, then what is the total probability
+    of reaching S4 from S1 using paths of at most length 3? List all such paths and compute
+    the total probability. Show your calculations. (An action followed by a transition into a next
+    state counts as a total of one move.)}
+    
+    \par
+
+    \item \textbf{Given that $R(S1, A1, S2) = 10$, $R(S1, A2, S2) = 10$, $R(S1, A2, S3) = 15$, $R(S3, A4, S4) = 100$, 
+    and that rewards for all other transitions are $0$, write and expand the optimal value
+    function equation for $V_{opt}(S1)$. Assume that the discount factor is $\gamma$, and leave your final
+    answer in terms of $V_{opt}(S2)$ and $V_{opt}(S3)$.}
+    
+    \par 
+
+    \item \textbf{Assume that by simulating this MDP using some exploration policy $\pi$, we obtain the
+    two following episodes:}
+
+    \begin{figure}[H]
+        \centering  
+        \includegraphics[width=0.8\textwidth]{Q11_mdp.png}
+        \label{fig:Q11_mdp}
+    \end{figure}
+
+    \textbf{Use Q-learning updates to calculate the agent’s final optimal policy given this data stream,
+    and show all intermediate steps. Assume $\gamma = 1$. For your reference, the Q-learning update equation is given by:}
+    
+    \[ \eta = \frac{1}{1 + \text{number of updates to } \hat{Q}_{opt}(s, a)} \]
+
+    \textbf{For each observed $(s, a, r, s')$:}
+
+    \[ Estimate, \; \hat{Q}^{(t)}_{opt}(s, a) = (1 - \eta) \hat{Q}^{(t-1)}_{opt}(s, a) + \eta[R(s, a, s') + \gamma \hat{V}^{(t-1)}_{opt}(s')] \]
+    \[ where \: \hat{V}_{opt}(s') = \max_{\substack{a'}} \ \hat{Q}_{opt}(s', a') \]
+
+\end{enumerate}
+
+\section{Academic Integrity}
+
+\begin{enumerate}[start=12,label=Q\arabic*,left=0pt]
+    \item \textbf{Review, and copy/paste the following academic integrity acknowledgement in your final submission as the answer to Q12.}
+    
+    \par I have read and understood the academic integrity policy as outlined in the course syllabus for CS4100. 
+    By pasting this acknowledgement in my submission, I declare that all work presented here is my own, and any conceptual 
+    discussions I may have had with classmates have been fully disclosed. I declare that generative AI was not used to answer
+    any questions in this assignment. Any use of generative AI to improve writing clarity alone is accompanied by an appendix 
+    with my original, unedited answers.
+
+\end{enumerate}
+
+\end{sloppypar}
+
+\bibliography{references}
+\bibliographystyle{ieeetr}
+
+\end{document}
