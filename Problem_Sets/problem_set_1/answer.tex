@@ -16,7 +16,24 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{xcolor}
+\usepackage{titlesec}
 
+% Define link color
+\hypersetup{
+    colorlinks=true,
+    linkcolor=teal,  % Color for internal links
+    filecolor=teal,  % Color for file links
+    urlcolor=teal,   % Color for URLs
+    citecolor=black  % Color for citation links
+}
+
+% Define custom dark teal color
+\definecolor{darkteal}{RGB}{0, 102, 102} % Adjust the RGB values as needed
+
+% Define section color
+\titleformat{\section}
+  {\color{darkteal}\normalfont\Large\bfseries} % Formatting for section titles
+  {\thesection}{1em}{}
 
 \providecommand{\keywords}[1]
 {
@@ -93,7 +110,7 @@ Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \hr
 
 \section{Search}
 
-\par In this problem set, we will be using Rook Jumping Mazes (RJMs) - a game based on
+In this problem set, we will be using Rook Jumping Mazes (RJMs) - a game based on
 Rook moves in Chess - to understand various search techniques. In a RJM, you are
 given a square $n \times n$ grid, with each cell containing a number between $1$ to $n - 1$. From
 any cell, the player may move either horizontally or vertically but must take exactly the
@@ -374,7 +391,7 @@ shot. He lets the machine control the following values:
     The objection function $f(x)$ would try to maximize the user rating. However, if we want to use gradient descent, we can manipulate the 
     user rating by doing 
     
-    \[f(x) = 10 - User Rating(x)\]
+    \[ f(x) = 10 - User Rating(x) \]
 
     This would mean that a user rating of 10 becomes:
 
@@ -415,13 +432,12 @@ shot. He lets the machine control the following values:
     \end{figure}
 
     \item \textbf{Why is it desirable to combine iterative deepening with alpha-beta pruning from a practical standpoint?}
-    \par Iterative deepening allows us to use DFS's low memory requirement combined with BFS's ability to explore multiple solutions.
-    Alpha-beta pruning, on the other hand, reduces the number of nodes/branches needed to be evaluated and explored speeding up the search
-    by eliminating branches that cannot influence the final decision.
-
-    By combining these two together, the search can hone-in on more promising paths due to iterative deepening and
-    skip exploring paths that are redundant. This will allow us to perform the search on a much bigger tree due to the low memory usage
-    but at the same time, find a relatively good solution in a timely manner.
+    \par Combining Iterative Deepening Search (IDS) with Alpha-Beta Pruning (ABP) is desirable because it combines the strengths 
+    of both techniques to enhance search efficiency. IDS performs depth-limited searches iteratively, where the algorithm explores 
+    progressively deeper levels while using low memory usage, similar to Depth-First Search (DFS). 
+    
+    When IDS is combined with ABP, the pruning mechanism can effectively cut off branches at shallower depths based on the partial 
+    information obtained, which results in the reduced number of nodes needed to be evaluated and faster search times.
 
 \end{enumerate}
 
