@@ -61,23 +61,23 @@ Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \hr
 \section{Categorizing AI Environments}
 
 \begin{enumerate}[start=1,label=Q\arabic*,left=0pt]
-    \item \textbf{Under what (implementation-related) assumptions is maze-solving a fully observable environment? What are the agent’s percepts?}
+    \item \textbf{Under what (implementation-related) assumptions is maze-solving a fully observable environment? What are the agent’s percepts? \hfill \textcolor{teal}{(2)}}
     
     \par 
     
-    \item \textbf{Under what (implementation-related) assumptions is maze-solving a partially observable environment? What are the agent’s percepts?}
+    \item \textbf{Under what (implementation-related) assumptions is maze-solving a partially observable environment? What are the agent’s percepts? \hfill \textcolor{teal}{(2)}}
     
     \par
     
-    \item \textbf{Is a known environment always fully observable? Explain with an example.}
+    \item \textbf{Is a known environment always fully observable? Explain with an example. \hfill \textcolor{teal}{(2)}}
     
     \par
     
-    \item \textbf{Is a partially observable environment always an unknown environment? Explain with an example.}
+    \item \textbf{Is a partially observable environment always an unknown environment? Explain with an example. \hfill \textcolor{teal}{(2)}}
     
     \par 
 
-    \item \textbf{What is the difference between an unknown environment and a non-deterministic environment? Explain with an example.}
+    \item \textbf{What is the difference between an unknown environment and a non-deterministic environment? Explain with an example. \hfill \textcolor{teal}{(2)}}
     
     \par
     
@@ -105,7 +105,7 @@ RJM is: [D1, A1, A5, C5, C1, C2, D2, A2]. Such a game lends itself well to the v
 search algorithms we covered in class.
 
 \begin{enumerate}[start=6,label=Q\arabic*,left=0pt]
-    \item \textbf{Can both Breadth-First Search (BFS) and Depth-First Search (DFS) be used to solve RJMs? Will both yield the shortest path?}
+    \item \textbf{Can both Breadth-First Search (BFS) and Depth-First Search (DFS) be used to solve RJMs? Will both yield the shortest path? \hfill \textcolor{teal}{(2)}}
     
     \par
 
@@ -117,7 +117,7 @@ search algorithms we covered in class.
 
     \[ H(node, goal, n) = \frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \]
 
-    \textbf{is a consistent heuristic. Remember that a proof may not rely on a single example, but instead must hold true in general.}
+    \textbf{is a consistent heuristic. Remember that a proof may not rely on a single example, but instead must hold true in general. \hfill \textcolor{teal}{(5)}}
     
     \par
     
@@ -128,7 +128,7 @@ search algorithms we covered in class.
         \label{fig:Q8_RJM}
     \end{figure}
 
-    \textbf{On this maze, using the heuristic from Q7, complete the A* search process shown be- low, starting with Step 2. Terminate your search when the Goal node (cell D4) is popped from the priority queue. Double check your calculations!}
+    \textbf{On this maze, using the heuristic from Q7, complete the A* search process shown be- low, starting with Step 2. Terminate your search when the Goal node (cell D4) is popped from the priority queue. Double check your calculations! \hfill \textcolor{teal}{(8)}}
     
     \par
 
@@ -148,15 +148,15 @@ shot. He lets the machine control the following values:
 \end{itemize}
 
 \begin{enumerate}[start=9,label=Q\arabic*,left=0pt]
-    \item \textbf{Based on our discussions in class, is this problem well-suited to local search algorithms? Explain your reasoning.}
+    \item \textbf{Based on our discussions in class, is this problem well-suited to local search algorithms? Explain your reasoning. \hfill \textcolor{teal}{(2)}}
     
     \par 
     
-    \item \textbf{How you would implement such a program? What would be a reasonable objective function? (This question is somewhat open-ended, so don’t worry too much about the ‘right’ answer. I am really looking for whether your thought process reflects a solid understanding of how local search works.)}
+    \item \textbf{How you would implement such a program? What would be a reasonable objective function? (This question is somewhat open-ended, so don’t worry too much about the ‘right’ answer. I am really looking for whether your thought process reflects a solid understanding of how local search works.) \hfill \textcolor{teal}{(2)}}
     
     \par
 
-    \item \textbf{Which of the optimizations and local search variants discussed in class (random restarts, varying step size, simulated annealing and genetic algorithms) are applicable to this problem, and why?}
+    \item \textbf{Which of the optimizations and local search variants discussed in class (random restarts, varying step size, simulated annealing and genetic algorithms) are applicable to this problem, and why? \hfill \textcolor{teal}{(2)}}
     
     \par 
 
@@ -166,9 +166,9 @@ shot. He lets the machine control the following values:
 
 \begin{enumerate}[start=12,label=Q\arabic*,left=0pt]
     \item \textbf{Construct a game tree example with a depth of 4 and a branching factor of 2, that illustrates the best-case for alpha-beta pruning, except for the trivial solution. Hand drawn figures accepted for this question, but please ensure clarity. 
-    (Here's some inspiration: \href{https://science.slc.edu/~jmarshall/courses/2005/fall/cs151/lectures/minimax/BestCase.html}{CS151, 2005. Jim Marshall, SLC})}
+    (Here's some inspiration: \href{https://science.slc.edu/~jmarshall/courses/2005/fall/cs151/lectures/minimax/BestCase.html}{CS151, 2005. Jim Marshall, SLC}) \hfill \textcolor{teal}{(2)}}
 
-    \item \textbf{Why is it desirable to combine iterative deepening with alpha-beta pruning from a practical standpoint?}
+    \item \textbf{Why is it desirable to combine iterative deepening with alpha-beta pruning from a practical standpoint? \hfill \textcolor{teal}{(2)}}
     
     \par 
 

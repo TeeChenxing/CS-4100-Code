@@ -61,7 +61,7 @@ Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \hr
 \section{Categorizing AI Environments}
 
 \begin{enumerate}[start=1,label=Q\arabic*,left=0pt]
-    \item \textbf{Under what (implementation-related) assumptions is maze-solving a fully observable environment? What are the agent’s percepts?}
+    \item \textbf{Under what (implementation-related) assumptions is maze-solving a fully observable environment? What are the agent’s percepts? \hfill \textcolor{teal}{(2)}}
     
     \par We would assume that the agent is able to have all the information regarding the maze environment to be able to determine if the maze
     is fully observable. 
@@ -74,7 +74,7 @@ Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \hr
         \item The possible turns/moves it could make from its current position.
     \end{itemize}
     
-    \item \textbf{Under what (implementation-related) assumptions is maze-solving a partially observable environment? What are the agent’s percepts?}
+    \item \textbf{Under what (implementation-related) assumptions is maze-solving a partially observable environment? What are the agent’s percepts? \hfill \textcolor{teal}{(2)}}
     
     \par A maze is partially observable if the agent has limited information. This would mean that the agent
     will not have all the information regarding the maze like all the walls and the ways it can traverse. Therefore,
@@ -86,13 +86,13 @@ Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \hr
         \item The agent can only sense/see the maze in its immediate surrounding.
     \end{itemize}
     
-    \item \textbf{Is a known environment always fully observable? Explain with an example.}
+    \item \textbf{Is a known environment always fully observable? Explain with an example. \hfill \textcolor{teal}{(2)}}
     
     \par No, consider the game of solitaire. The agent knows the rules of this environment where in this case would be the rules
     of the card game making it a known environment. However, it is only partially observable since the agent will not know which card will
     appear next because this information is hidden.
     
-    \item \textbf{Is a partially observable environment always an unknown environment? Explain with an example.}
+    \item \textbf{Is a partially observable environment always an unknown environment? Explain with an example.\hfill \textcolor{teal}{(2)}}
     
     \par No, consider an agent that delivers coffee within Google's headquarter. The agent has general information about the office building,
     like the number of floors, elevator locations etc. This environment is only partially observable because the agent has limited visibility due to
@@ -102,7 +102,7 @@ Problem set 1 for CS 4100 Summer II. Taught by assistant teaching professor, \hr
     can navigate its way to a location following certain sets of rules such as not bumping into employees, moving on certain designated office highways,
     utilizing elevators to move up/down floors etc.
 
-    \item \textbf{What is the difference between an unknown environment and a non-deterministic environment? Explain with an example.}
+    \item \textbf{What is the difference between an unknown environment and a non-deterministic environment? Explain with an example. \hfill \textcolor{teal}{(2)}}
     
     \par An unknown environment is one where we do not know the rules. In a non-deterministic environment, there is the factor of randomness/uncertainty. A good example
     of this is to visualize a drone visiting an unexplored alien planet with the goal of finding life. This is an unknown environment since we do not have any prior maps or information 
@@ -135,7 +135,7 @@ RJM is: [D1, A1, A5, C5, C1, C2, D2, A2]. Such a game lends itself well to the v
 search algorithms we covered in class.
 
 \begin{enumerate}[start=6,label=Q\arabic*,left=0pt]
-    \item \textbf{Can both Breadth-First Search (BFS) and Depth-First Search (DFS) be used to solve RJMs? Will both yield the shortest path?}
+    \item \textbf{Can both Breadth-First Search (BFS) and Depth-First Search (DFS) be used to solve RJMs? Will both yield the shortest path? \hfill \textcolor{teal}{(2)}}
     
     \par Yes, BFS and DFS can be used to solve RJMs. This is because we can turn a RJM into an unweighted graph which BFS and DFS 
     can be used for. 
@@ -152,7 +152,7 @@ search algorithms we covered in class.
 
     \[ H(node, goal, n) = \frac{|node_x - goal_x| + |node_y - goal_y|}{n - 1} \]
 
-    \textbf{is a consistent heuristic. Remember that a proof may not rely on a single example, but instead must hold true in general.}
+    \textbf{is a consistent heuristic. Remember that a proof may not rely on a single example, but instead must hold true in general. \hfill \textcolor{teal}{(5)}}
     
     \par Here, we want to proof that using the Manhattan distance, this equation holds true for all cases:
     \[ h(n) \leq c(n \rightarrow n') + h(n') \]
@@ -245,7 +245,7 @@ search algorithms we covered in class.
         \includegraphics[height=0.2\textheight]{Q8_RJM.png}
         \label{fig:Q8_RJM}
     \end{figure}
-    \textbf{On this maze, using the heuristic from Q7, complete the A* search process shown be- low, starting with Step 2. Terminate your search when the Goal node (cell D4) is popped from the priority queue. Double check your calculations!}
+    \textbf{On this maze, using the heuristic from Q7, complete the A* search process shown be- low, starting with Step 2. Terminate your search when the Goal node (cell D4) is popped from the priority queue. Double check your calculations! \hfill \textcolor{teal}{(8)}}
     
     \par Initialization:
     \begin{align*}\
@@ -386,13 +386,13 @@ shot. He lets the machine control the following values:
 \end{itemize}
 
 \begin{enumerate}[start=9,label=Q\arabic*,left=0pt]
-    \item \textbf{Based on our discussions in class, is this problem well-suited to local search algorithms? Explain your reasoning.}
+    \item \textbf{Based on our discussions in class, is this problem well-suited to local search algorithms? Explain your reasoning. \hfill \textcolor{teal}{(2)}}
     
     \par This problem aims to learn the user’s preferences to create the most optimal coffee mix tailored to the user. 
     In other words, the focus is on the final solution rather than the specific optimizations or paths taken to achieve the perfect mix. 
     Conveniently, local search algorithms are designed for this type of problem, making them well-suited for finding the ideal solution.
     
-    \item \textbf{How you would implement such a program? What would be a reasonable objective function? (This question is somewhat open-ended, so don’t worry too much about the ‘right’ answer. I am really looking for whether your thought process reflects a solid understanding of how local search works.)}
+    \item \textbf{How you would implement such a program? What would be a reasonable objective function? (This question is somewhat open-ended, so don’t worry too much about the ‘right’ answer. I am really looking for whether your thought process reflects a solid understanding of how local search works.) \hfill \textcolor{teal}{(2)}}
     
     \par I would use a hill-climbing algorithm. I would define the objective function to be based on user feedback.
     Lets say for each cup of coffee this machine brews, the user rates the coffee from 1 to 10 where 10 would mean perfect.
@@ -412,7 +412,7 @@ shot. He lets the machine control the following values:
     If we do this, we can frame the objective function from maximizing to minimizing $f(x)$ and thus perform gradient descent
     to find the optimal coffee blend.
 
-    \item \textbf{Which of the optimizations and local search variants discussed in class (random restarts, varying step size, simulated annealing and genetic algorithms) are applicable to this problem, and why?}
+    \item \textbf{Which of the optimizations and local search variants discussed in class (random restarts, varying step size, simulated annealing and genetic algorithms) are applicable to this problem, and why? \hfill \textcolor{teal}{(2)}}
     
     \par All 4 techniques are applicable to this solution. For random restarts, lets assume we are trying to minimize the objective
     function, the optimization algorithm we are using may get stuck inside a valley which may not be the global minimum. By using random
@@ -434,7 +434,7 @@ shot. He lets the machine control the following values:
 
 \begin{enumerate}[start=12,label=Q\arabic*,left=0pt]
     \item \textbf{Construct a game tree example with a depth of 4 and a branching factor of 2, that illustrates the best-case for alpha-beta pruning, except for the trivial solution. Hand drawn figures accepted for this question, but please ensure clarity. 
-    (Here's some inspiration: \href{https://science.slc.edu/~jmarshall/courses/2005/fall/cs151/lectures/minimax/BestCase.html}{CS151, 2005. Jim Marshall, SLC})}    
+    (Here's some inspiration: \href{https://science.slc.edu/~jmarshall/courses/2005/fall/cs151/lectures/minimax/BestCase.html}{CS151, 2005. Jim Marshall, SLC}) \hfill \textcolor{teal}{(2)}}    
     
     \begin{figure}[H]
         \centering  
@@ -442,7 +442,7 @@ shot. He lets the machine control the following values:
         \label{fig:Q12_tree}
     \end{figure}
 
-    \item \textbf{Why is it desirable to combine iterative deepening with alpha-beta pruning from a practical standpoint?}
+    \item \textbf{Why is it desirable to combine iterative deepening with alpha-beta pruning from a practical standpoint? \hfill \textcolor{teal}{(2)}}
     
     \par Combining Iterative Deepening Search (IDS) with Alpha-Beta Pruning (ABP) is desirable because it combines the strengths 
     of both techniques to enhance search efficiency. IDS performs depth-limited searches iteratively, where the algorithm explores 

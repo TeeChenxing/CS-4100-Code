@@ -70,23 +70,23 @@ represented along the edges (note that each edge is directional).
 \end{figure}
 
 \begin{enumerate}[start=1,label=Q\arabic*,left=0pt]
-    \item \textbf{Given the above Markov model, explain whether the stationary distribution depends on the start state (without actually computing the stationary distribution).}
+    \item \textbf{Given the above Markov model, explain whether the stationary distribution depends on the start state (without actually computing the stationary distribution). \hfill \textcolor{teal}{(2)}}
     
-    \par 
+    \par
     
-    \item \textbf{Given the initial probability distribution} $p_0 = [0.1, 0.6, 0.3]$ \textbf{for states} $S1, S2,$ \textbf{and} $S3$ \textbf{respectively, compute the stationary distribution for the given Markov model. You may use a program to do the computations. Report only the final stationary distribution} ${\pi}$.
+    \item \textbf{Given the initial probability distribution} $p_0 = [0.1, 0.6, 0.3]$ \textbf{for states} $S1, S2,$ \textbf{and} $S3$ \textbf{respectively, compute the stationary distribution for the given Markov model. You may use a program to do the computations. Report only the final stationary distribution ${\pi}$. \hfill \textcolor{teal}{(2)}}
 
+    \par
+    
+    \item \textbf{What is the probability of the following transition sequence: $S1 \rightarrow S1 \rightarrow S2 \rightarrow S3?$ (Use the stationary distribution computed above, and show your calculations.) \hfill \textcolor{teal}{(2)}}
+    
     \par 
     
-    \item \textbf{What is the probability of the following transition sequence: $S1 \rightarrow S1 \rightarrow S2 \rightarrow S3?$ (Use the stationary distribution computed above, and show your calculations.)}
-    
-    \par 
-    
-    \item \textbf{Given that we start in the state $S2$, what is the probability of returning to $S2$ after two transitions? (Show your calculations.)}
+    \item \textbf{Given that we start in the state $S2$, what is the probability of returning to $S2$ after two transitions? (Show your calculations.) \hfill \textcolor{teal}{(2)}}
     
     \par 
 
-    \item \textbf{Given the starting probability distribution $p_0 = [0.1, 0.6, 0.3]$, what is the probability of ending up in $S2$ after exactly two transitions? (Show your calculations.)}
+    \item \textbf{Given the starting probability distribution $p_0 = [0.1, 0.6, 0.3]$, what is the probability of ending up in $S2$ after exactly two transitions? (Show your calculations.) \hfill \textcolor{teal}{(2)}}
     
     \par 
 
@@ -115,14 +115,14 @@ and \textbf{Tails} respectively.
     and emissions to outcomes with the corresponding probabilities labeled along the edges.
     Hand-drawn figures accepted for this question, provided the grader can read everything
     clearly. (For reference, see \href{https://rajagopalvenkat.com/teaching/resources/AI/ch6.html\#hmm}{the second diagram in our HMM notes}, showing the Very Late,
-    Late and On Time hidden states, and the Happy and Sad outcomes.)}
+    Late and On Time hidden states, and the Happy and Sad outcomes.) \hfill \textcolor{teal}{(5)}}
 
     \par
 
     \item \textbf{Given the observed outcome sequence, predict which coin was most likely flipped
     in each of the three turns (i.e., compute the most likely hidden sequence). Show all your
     intermediate calculations and use the stationary distribution to reason about which coin
-    was flipped in the very first round.}
+    was flipped in the very first round. \hfill \textcolor{teal}{(10)}}
 
     \par 
 
@@ -141,21 +141,21 @@ along each dashed edge.
 \end{figure}
 
 \begin{enumerate}[start=8,label=Q\arabic*,left=0pt]
-    \item \textbf{How many unique policies does this MDP have? Explain your reasoning and list all policies. Use $X$ to indicate no possible action from a state.}
+    \item \textbf{How many unique policies does this MDP have? Explain your reasoning and list all policies. Use $X$ to indicate no possible action from a state. \hfill \textcolor{teal}{(2)}}
     
     \par 
     
     \item \textbf{If from any state, all valid actions are equally likely, then what is the total probability
     of reaching S4 from S1 using paths of at most length 3? List all such paths and compute
     the total probability. Show your calculations. (An action followed by a transition into a next
-    state counts as a total of one move.)}
+    state counts as a total of one move.) \hfill \textcolor{teal}{(4)}}
     
     \par
 
     \item \textbf{Given that $R(S1, A1, S2) = 10$, $R(S1, A2, S2) = 10$, $R(S1, A2, S3) = 15$, $R(S3, A4, S4) = 100$, 
     and that rewards for all other transitions are $0$, write and expand the optimal value
     function equation for $V_{opt}(S1)$. Assume that the discount factor is $\gamma$, and leave your final
-    answer in terms of $V_{opt}(S2)$ and $V_{opt}(S3)$.}
+    answer in terms of $V_{opt}(S2)$ and $V_{opt}(S3)$. \hfill \textcolor{teal}{(4)}}
     
     \par 
 
@@ -169,7 +169,7 @@ along each dashed edge.
     \end{figure}
 
     \textbf{Use Q-learning updates to calculate the agent’s final optimal policy given this data stream,
-    and show all intermediate steps. Assume $\gamma = 1$. For your reference, the Q-learning update equation is given by:}
+    and show all intermediate steps. Assume $\gamma = 1$. For your reference, the Q-learning update equation is given by: \hfill \textcolor{teal}{(10)}}
     
     \[ \eta = \frac{1}{1 + \text{number of updates to } \hat{Q}_{opt}(s, a)} \]
 
