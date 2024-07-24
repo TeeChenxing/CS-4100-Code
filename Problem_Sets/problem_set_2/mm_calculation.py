@@ -4,7 +4,6 @@ import numpy as np
 def compute_stationary_distribution(A, p):
     for _ in range(10000):
         p = p.dot(A)
-
     return p
 
 
@@ -25,6 +24,12 @@ def main():
     p0 = np.array([0.1, 0.6, 0.3])
     stationary_distribution = compute_stationary_distribution(Q1, p0)
     print(f"Problem Set Matrix: {stationary_distribution}")
-    
+
+    q4_value = (0.409 * 0.5 * 0.9) + (0.409 * 0 * 0) + (0.409 * 0.5 * 0.3)
+    print(f"Q4 Value: {q4_value}")
+
+    q5_value = (0.1 * 0.1 * 0.9) + (0.1 * 0.9 * 0) + (0.1 * 0 * 0.3) + (0.6 * 0.5 * 0.9) + (0.6 * 0 * 0) + (0.6 * 0.5 * 0.3) + (0.3 * 0.7 * 0.9) + (0.3 * 0.3 * 0) + (0.3 * 0 * 0.3)
+    print(f"Q5 Value: {q5_value}")
+
 if __name__ == "__main__":
     main()

@@ -28,7 +28,7 @@
 }
 
 % Define custom dark teal color
-\definecolor{darkteal}{RGB}{0, 102, 102} % Adjust the RGB values as needed
+\definecolor{darkteal}{RGB}{0, 102, 102}
 
 % Define section color
 \titleformat{\section}
@@ -73,23 +73,42 @@ represented along the edges (note that each edge is directional).
     \item \textbf{Given the above Markov model, explain whether the stationary distribution depends on the start state (without actually computing the stationary distribution). \hfill \textcolor{teal}{(2)}}
     
     \par Given the above Markov model, the stationary distribution does not depend on the start state. Given any start state,
-    the probability distribution will converge towards the stationary distribution as $n$ grows larger.
+    the probability distribution will converge towards the stationary distribution as $n$ grows larger as long as there is a path that
+    exists between any two states which the Markov model above satisfies.
     
     \item \textbf{Given the initial probability distribution} $p_0 = [0.1, 0.6, 0.3]$ \textbf{for states} $S1, S2,$ \textbf{and} $S3$ \textbf{respectively, compute the stationary distribution for the given Markov model. You may use a program to do the computations. Report only the final stationary distribution ${\pi}$. \hfill \textcolor{teal}{(2)}}
 
     \par $ \pi = [0.38636364, \: 0.40909091, \: 0.20454545] $
     
     \item \textbf{What is the probability of the following transition sequence: $S1 \rightarrow S1 \rightarrow S2 \rightarrow S3?$ (Use the stationary distribution computed above, and show your calculations.) \hfill \textcolor{teal}{(2)}}
-    
-    \par 
+    \begin{align*}
+        & \hfill \text{Probability of starting at S1} \hfill = 0.3864 \\\\
+        P(S1 \rightarrow S1 \rightarrow S2 \rightarrow S3) &= \text{(Probability of starting at S1)} \cdot P(S1 | S1) \cdot P(S2 | S1) \cdot P(S3 | S2) \\
+        P(S1 \rightarrow S1 \rightarrow S2 \rightarrow S3) &= 0.3864 \cdot 0.1 \cdot 0.9 \cdot 0.5 \\
+        P(S1 \rightarrow S1 \rightarrow S2 \rightarrow S3) &= 0.017388
+    \end{align*}
     
     \item \textbf{Given that we start in the state $S2$, what is the probability of returning to $S2$ after two transitions? (Show your calculations.) \hfill \textcolor{teal}{(2)}}
-    
-    \par 
+    \begin{align*}
+        & \hfill \text{Probability of starting at S2} \hfill = 0.409 \\\\
+        P(S2 \rightarrow X \rightarrow S2) &= P(S2 \rightarrow S1 \rightarrow S2) + P(S2 \rightarrow S2 \rightarrow S2) + P(S2 \rightarrow S3 \rightarrow S2) \\
+        P(S2 \rightarrow X \rightarrow S2) &= (0.409 \cdot 0.5 \cdot 0.9) + (0.409 \cdot 0 \cdot 0) + (0.409 \cdot 0.5 \cdot 0.3) \\
+        P(S2 \rightarrow X \rightarrow S2) &= 0.2454
+    \end{align*}
 
     \item \textbf{Given the starting probability distribution $p_0 = [0.1, 0.6, 0.3]$, what is the probability of ending up in $S2$ after exactly two transitions? (Show your calculations.) \hfill \textcolor{teal}{(2)}}
-    
-    \par 
+    \begin{align*}
+        & \hfill \text{Probability of starting at S1} \hfill = 0.1 \\
+        & \hfill \text{Probability of starting at S2} \hfill = 0.6 \\
+        & \hfill \text{Probability of starting at S3} \hfill = 0.3 \\\\
+        P(X \rightarrow Y \rightarrow S2) &= P(S1 \rightarrow S1 \rightarrow S2) + P(S1 \rightarrow S2 \rightarrow S2) + P(S1 \rightarrow S3 \rightarrow S2) \\
+        &\quad + P(S2 \rightarrow S1 \rightarrow S2) + P(S2 \rightarrow S2 \rightarrow S2) + P(S2 \rightarrow S3 \rightarrow S2) \\
+        &\quad + P(S3 \rightarrow S1 \rightarrow S2) + P(S3 \rightarrow S2 \rightarrow S2) + P(S3 \rightarrow S3 \rightarrow S2) \\\\
+        &= (0.1 \cdot 0.1 \cdot 0.9) + (0.1 \cdot  0.9 \cdot 0) + (0.1 \cdot 0 \cdot 0.3) \\
+        &\quad + (0.6 \cdot 0.5 \cdot 0.9) + (0.6 \cdot 0 \cdot  0) + (0.6 \cdot 0.5 \cdot 0.3) \\
+        &\quad + (0.3 \cdot 0.7 \cdot 0.9) + (0.3 \cdot 0.3 \cdot 0) + (0.3 \cdot 0 \cdot 0.3) \\\\
+        &= 0.558
+    \end{align*}
 
 \end{enumerate}
 
@@ -177,7 +196,7 @@ along each dashed edge.
     \textbf{For each observed $(s, a, r, s')$:}
 
     \[ Estimate, \; \hat{Q}^{(t)}_{opt}(s, a) = (1 - \eta) \hat{Q}^{(t-1)}_{opt}(s, a) + \eta[R(s, a, s') + \gamma \hat{V}^{(t-1)}_{opt}(s')] \]
-    \[ where \: \hat{V}_{opt}(s') = \max_{\substack{a'}} \ \hat{Q}_{opt}(s', a') \]
+    \[ where \:\: \hat{V}_{opt}(s') = \max_{\substack{a'}} \ \hat{Q}_{opt}(s', a') \]
 
 \end{enumerate}
 
