@@ -17,6 +17,8 @@
 \usepackage{amssymb}
 \usepackage{xcolor}
 \usepackage{titlesec}
+\usepackage{tikz} 
+
 
 % Define link color
 \hypersetup{
@@ -137,7 +139,11 @@ and \textbf{Tails} respectively.
     clearly. (For reference, see \href{https://rajagopalvenkat.com/teaching/resources/AI/ch6.html\#hmm}{the second diagram in our HMM notes}, showing the Very Late,
     Late and On Time hidden states, and the Happy and Sad outcomes.) \hfill \textcolor{teal}{(5)}}
 
-    \par
+    \begin{figure}[H]
+        \centering  
+        \includegraphics[height=0.3\textheight]{Q6_hmm.png}
+        \label{fig:Q6_hmm}
+    \end{figure}
 
     \item \textbf{Given the observed outcome sequence, predict which coin was most likely flipped
     in each of the three turns (i.e., compute the most likely hidden sequence). Show all your
