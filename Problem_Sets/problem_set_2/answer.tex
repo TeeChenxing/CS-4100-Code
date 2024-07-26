@@ -150,7 +150,26 @@ and \textbf{Tails} respectively.
     intermediate calculations and use the stationary distribution to reason about which coin
     was flipped in the very first round. \hfill \textcolor{teal}{(10)}}
 
-    \par 
+    FC = Fair Coin, BC = Biased Coin, H = Heads, T = Tails
+
+    \[
+        Transition \: Matrix = 
+        \bordermatrix{ & FC & BC \cr
+        FC & 0.5 & 0.5 \cr
+        BC & 0.34 & 0.66 }
+    \]
+
+    \[
+        Observation \: Matrix = 
+        \bordermatrix{ & H & T \cr
+        H & 0.5 & 0.5 \cr
+        T & 0.7 & 0.3 }
+    \]
+
+    \[ Stationary \: Distribution: \pi = [0.4047619, \: 0.5952381] \]
+
+    According to $\pi$, it is more likely that the biased coin was flipped in 
+    the initial round.
 
 \end{enumerate}
 
@@ -183,7 +202,20 @@ along each dashed edge.
     function equation for $V_{opt}(S1)$. Assume that the discount factor is $\gamma$, and leave your final
     answer in terms of $V_{opt}(S2)$ and $V_{opt}(S3)$. \hfill \textcolor{teal}{(4)}}
     
-    \par 
+    \begin{align*}
+        & V_{opt}(S1) = \max_{\substack{a}}\left(\sum_{s'}T(S1, a, s')[R(S1, a, s') + \gamma V_{opt}(s')]\right) \\\\
+        & \text{For A1:} \\\\
+        & = T(S1, A1, S1)[R(S1, A1, S1) + \gamma V_{opt}(S1)] + T(S1, A1, S2)[R(S1, A1, S2) + \gamma V_{opt}(S2)] \\
+        & = 0.4[0 + \gamma V_{opt}(S1)] + 0.6[10 + \gamma V_{opt}(S2)] \\
+        & = (\gamma 0.4 V_{opt}(S1)) + (6 + \gamma 0.6 V_{opt}(S2)) \\
+        & = 6 + \gamma(0.4 V_{opt}(S1) + 0.6 V_{opt}(S2)) \\\\
+        & \text{For A2:} \\\\
+        & = T(S1, A2, S2)[R(S1, A2, S2) + \gamma V_{opt}(S2)] + T(S1, A2, S3)[R(S1, A2, S3) + \gamma V_{opt}(S3)] \\
+        & = 0.8[10 + \gamma V_{opt}(S2)] + 0.2[15 + \gamma V_{opt}(S3)] \\
+        & = (8 + \gamma 0.8 V_{opt}(S2)) + (3 + \gamma 0.2 V_{opt}(S3)) \\
+        & = 11 + \gamma(0.8 V_{opt}(S2) + 0.2 V_{opt}(S3)) \\\\
+        & \therefore \: V_{opt}(S1) = \max_{\substack{a}} \biggl( 6 + \gamma(0.4 V_{opt}(S1) + 0.6 V_{opt}(S2)), 11 + \gamma(0.8 V_{opt}(S2) + 0.2 V_{opt}(S3)) \biggr)
+    \end{align*}
 
     \item \textbf{Assume that by simulating this MDP using some exploration policy $\pi$, we obtain the
     two following episodes:}

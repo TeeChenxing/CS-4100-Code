@@ -14,7 +14,7 @@ def main():
 
     initial_distribution = np.array([0.8, 0.1, 0.1])
     stationary_distribution = compute_stationary_distribution(weather_matrix, initial_distribution)
-    print(f"Weather Matrix: {stationary_distribution}")
+    print(f"Weather Matrix Stationary Distribution: {stationary_distribution}")
 
     Q1 = np.array([[0.1, 0.9, 0.0], 
                    [0.5, 0.0, 0.5], 
@@ -29,6 +29,16 @@ def main():
 
     q5_value = (0.1 * 0.1 * 0.9) + (0.1 * 0.9 * 0) + (0.1 * 0 * 0.3) + (0.6 * 0.5 * 0.9) + (0.6 * 0 * 0) + (0.6 * 0.5 * 0.3) + (0.3 * 0.7 * 0.9) + (0.3 * 0.3 * 0) + (0.3 * 0 * 0.3)
     print(f"Q5 Value: {q5_value}")
+
+
+    #################################
+
+    coin_matrix = np.array([[0.5, 0.5], 
+                            [0.34, 0.66]])
+
+    initial_distribution = np.array([0.5, 0.5])
+    stationary_distribution = compute_stationary_distribution(coin_matrix, initial_distribution)
+    print(f"Coin Matrix Stationary Distribution: {stationary_distribution}")
 
 if __name__ == "__main__":
     main()
