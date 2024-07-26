@@ -63,9 +63,11 @@ def main():
 
     print(f"Fair Coin is represented by 0 and Biased Coin is represented by 1.")
     for coin_type_pattern in coin_type_permutations:
-        print(f"Coin Type: {coin_type_pattern}")
         value = calculate_single_sequence(coin_type_pattern, head_or_tails_pattern, which_coin_state, head_or_tails_observation, coin_stationary_dist)
         coin_all_probabilities.append(value)
+        
+        print(f"Coin Type: {coin_type_pattern}, Probability: {value:.6f}")
+
     
     # Find the max index and corresponding coin sequence
     max_index = np.argmax(coin_all_probabilities)

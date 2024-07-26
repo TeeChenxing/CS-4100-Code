@@ -148,9 +148,9 @@ and \textbf{Tails} respectively.
     \item \textbf{Given the observed outcome sequence, predict which coin was most likely flipped
     in each of the three turns (i.e., compute the most likely hidden sequence). Show all your
     intermediate calculations and use the stationary distribution to reason about which coin
-    was flipped in the very first round. \hfill \textcolor{teal}{(10)}}
+    was flipped in the very first round. \hfill \textcolor{teal}{(10)}} \\
 
-    FC = Fair Coin, BC = Biased Coin, H = Heads, T = Tails
+    \fbox{FC = Fair Coin, BC = Biased Coin, H = Heads, T = Tails}
 
     \[
         Transition \: Matrix = 
@@ -167,6 +167,72 @@ and \textbf{Tails} respectively.
     \]
 
     \[ Stationary \: Distribution: \pi = [0.4047619, \: 0.5952381] \]
+
+    \begin{align*}
+        & \textbf{One Sequence Permutations}:   \\\\
+        & FC \\
+        & \downarrow \quad P(Start \: FC) \cdot P(H | FC) = 0.4048 \cdot 0.5 = 0.2024 \\
+        & H \\\\
+        %%%
+        & BC \\
+        & \downarrow \quad P(Start \: BC) \cdot P(H | BC) = 0.5952 \cdot 0.7 = 0.4166 \\
+        & H \\\\
+    \end{align*}
+
+    \begin{align*}
+        & \textbf{Two Sequence Permutations}: \\\\
+        & FC \quad FC \\
+        & \downarrow \quad \quad \: \downarrow \quad 0.2024 \cdot P(FC | FC) \cdot P(H | FC) = 0.2024 \cdot 0.5 \cdot 0.5 = 0.0506 \\
+        & H \quad \quad H \\\\
+        %%%
+        & BC \quad FC \\
+        & \downarrow \quad \quad \: \downarrow \quad 0.4166 \cdot P(FC | BC) \cdot P(H | FC) = 0.4166 \cdot 0.34 \cdot 0.5 = 0.0708 \\
+        & H \quad \quad H \\\\
+        %%%
+        & FC \quad BC  \\
+        & \downarrow \quad \quad \: \downarrow \quad 0.2024 \cdot P(BC | FC) \cdot P(H | BC) = 0.2024 \cdot 0.5 \cdot 0.7 = 0.0708 \\
+        & H \quad \quad H \\\\
+        %%%
+        & BC \quad BC \\
+        & \downarrow \quad \quad \: \downarrow \quad 0.4166 \cdot P(BC | BC) \cdot P(H | BC) = 0.4166 \cdot 0.66 \cdot 0.7 = 0.1925 \\
+        & H \quad \quad H
+    \end{align*}
+
+    \begin{align*}
+        & \textbf{Three Sequence Permutations}: \\\\
+        %%% 1st
+        & FC \quad FC \quad FC \\
+        & \downarrow \quad \quad \: \downarrow \quad \quad \: \downarrow \quad 0.0506 \cdot P(FC | FC) \cdot P(T | FC) = 0.0506 \cdot 0.5 \cdot 0.5 = 0.01265 \\
+        & H \quad \quad H \quad \quad T \\\\
+        %%% 2nd
+        & FC \quad FC \quad BC \\
+        & \downarrow \quad \quad \: \downarrow \quad \quad \: \downarrow \quad 0.0506 \cdot P(FC | FC) \cdot P(T | FC) = 0.0506 \cdot 0.5 \cdot 0.5 = 0.01265 \\
+        & H \quad \quad H \quad \quad T \\\\
+        %%% 3rd
+        & FC \quad BC \quad FC \\
+        & \downarrow \quad \quad \: \downarrow \quad \quad \: \downarrow \quad 0.0506 \cdot P(FC | FC) \cdot P(T | FC) = 0.0506 \cdot 0.5 \cdot 0.5 = 0.01265 \\
+        & H \quad \quad H \quad \quad T \\\\
+        %%% 4th
+        & FC \quad BC \quad BC \\
+        & \downarrow \quad \quad \: \downarrow \quad \quad \: \downarrow \quad 0.0506 \cdot P(FC | FC) \cdot P(T | FC) = 0.0506 \cdot 0.5 \cdot 0.5 = 0.01265 \\
+        & H \quad \quad H \quad \quad T \\\\
+        %%% 5th
+        & BC \quad FC \quad FC \\
+        & \downarrow \quad \quad \: \downarrow \quad \quad \: \downarrow \quad 0.0506 \cdot P(FC | FC) \cdot P(T | FC) = 0.0506 \cdot 0.5 \cdot 0.5 = 0.01265 \\
+        & H \quad \quad H \quad \quad T \\\\
+        %%% 6th
+        & BC \quad FC \quad BC \\
+        & \downarrow \quad \quad \: \downarrow \quad \quad \: \downarrow \quad 0.0506 \cdot P(FC | FC) \cdot P(T | FC) = 0.0506 \cdot 0.5 \cdot 0.5 = 0.01265 \\
+        & H \quad \quad H \quad \quad T \\\\
+        %%% 7th
+        & BC \quad BC \quad FC \\
+        & \downarrow \quad \quad \: \downarrow \quad \quad \: \downarrow \quad 0.0506 \cdot P(FC | FC) \cdot P(T | FC) = 0.0506 \cdot 0.5 \cdot 0.5 = 0.01265 \\
+        & H \quad \quad H \quad \quad T \\\\
+        %%% 8th
+        & BC \quad BC \quad BC \\
+        & \downarrow \quad \quad \: \downarrow \quad \quad \: \downarrow \quad 0.0506 \cdot P(FC | FC) \cdot P(T | FC) = 0.0506 \cdot 0.5 \cdot 0.5 = 0.01265 \\
+        & H \quad \quad H \quad \quad T
+    \end{align*}
 
     According to $\pi$, it is more likely that the biased coin was flipped in 
     the initial round.
