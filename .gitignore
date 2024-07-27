@@ -5,6 +5,8 @@
 *.out
 *.gz
 *.json
+*.pth
 
 __pycache__/
 Submission/
+Labs/Lab3/data
