@@ -32,6 +32,9 @@
 % Define custom dark teal color
 \definecolor{darkteal}{RGB}{0, 102, 102}
 
+% Adjust Row Height
+\renewcommand{\arraystretch}{1.5}
+
 % Define section color
 \titleformat{\section}
   {\color{darkteal}\normalfont\Large\bfseries} % Formatting for section titles
@@ -345,6 +348,148 @@ along each dashed edge.
     \[ Estimate, \; \hat{Q}^{(t)}_{opt}(s, a) = (1 - \eta) \hat{Q}^{(t-1)}_{opt}(s, a) + \eta[R(s, a, s') + \gamma \hat{V}^{(t-1)}_{opt}(s')] \]
     \[ where \:\: \hat{V}_{opt}(s') = \max_{\substack{a'}} \ \hat{Q}_{opt}(s', a') \]
 
+    \begin{align*}
+        t = 1 \rightarrow Number \: of \: updates \: for \: &(S1, A1): 0 \\
+        & (S1, A2): 0 \\
+        & (S2, A1): 0 \\
+        & (S2, A3): 0 \\
+        & (S3, A4): 0 \\
+        \eta = \frac{1}{1 + 0} = 1 \\
+        \hat{Q}^{(1)}_{opt}(S1, A1) &= 0 + 1[10 + 0] \\
+        &= 10 \\
+        & \begin{array}{c}
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+                \hline
+                & t=0 & t=1 & t=2 & t=3 & t=4 & t=5 \\
+                \hline
+                $\hat{Q}^{(t)}_{opt}(S1, A1)$ & 0 & 10 & - & - & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & - & - & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & - & - & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & - & - & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & - & - & - & - \\ 
+                \hline
+            \end{tabular}
+        \end{array} \\
+        \displaybreak[1] \\
+        t = 2 \rightarrow Number \: of \: updates \: for \: &(S1, A1): 1 \\
+        & (S1, A2): 0 \\
+        & (S2, A1): 0 \\
+        & (S2, A3): 0 \\
+        & (S3, A4): 0 \\
+        \eta = \frac{1}{1 + 0} = 1 \\
+        \hat{Q}^{(2)}_{opt}(S2, A3) &= 0 + 1[0 + 0] \\
+        &= 0 \\
+        & \begin{array}{c}
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+                \hline
+                & t=0 & t=1 & t=2 & t=3 & t=4 & t=5 \\
+                \hline
+                $\hat{Q}^{(t)}_{opt}(S1, A1)$ & 0 & 10 & 10 & - & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & - & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & 0 & - & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & 0 & - & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & - & - & - \\ 
+                \hline
+            \end{tabular}
+        \end{array} \\
+        \displaybreak[1] \\
+        t = 3 \rightarrow Number \: of \: updates \: for \: &(S1, A1): 1 \\
+        & (S1, A2): 0 \\
+        & (S2, A1): 0 \\
+        & (S2, A3): 1 \\
+        & (S3, A4): 0 \\
+        \eta = \frac{1}{1 + 0} = 1 \\
+        \hat{Q}^{(3)}_{opt}(S3, A4) &= 0 + 1[100 + 0] \\
+        &= 100 \\
+        & \begin{array}{c}
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+                \hline
+                & t=0 & t=1 & t=2 & t=3 & t=4 & t=5 \\
+                \hline
+                $\hat{Q}^{(t)}_{opt}(S1, A1)$ & 0 & 10 & 10 & 10 & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & 0 & 0 & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & 0 & 0 & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 100 & - & - \\ 
+                \hline
+            \end{tabular}
+        \end{array} \\
+        \displaybreak[1] \\
+        t = 4 \rightarrow Number \: of \: updates \: for \: &(S1, A1): 1 \\
+        & (S1, A2): 0 \\
+        & (S2, A1): 0 \\
+        & (S2, A3): 1 \\
+        & (S3, A4): 1 \\
+        \eta = \frac{1}{1 + 0} = 1 \\
+        \hat{Q}^{(4)}_{opt}(S1, A2) &= 0 + 1 \left[ 15 + \max \left( \hat{Q}^{(3)}_{opt}(S2, A1), \hat{Q}^{(3)}_{opt}(S2, A3), \hat{Q}^{(3)}_{opt}(S3, A4) \right) \right] \\
+        &= 0 + 1 \left[ 15 + 100 \right] \\
+        &= 115 \\
+        & \begin{array}{c}
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+                \hline
+                & t=0 & t=1 & t=2 & t=3 & t=4 & t=5 \\
+                \hline
+                $\hat{Q}^{(t)}_{opt}(S1, A1)$ & 0 & 10 & 10 & 10 & 10 & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & 115 & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & 0 & 0 & 0 & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & 0 & 0 & 0 & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 100 & 100 & - \\ 
+                \hline
+            \end{tabular}
+        \end{array} \\
+        \displaybreak[1] \\
+        t = 5 \rightarrow Number \: of \: updates \: for \: &(S1, A1): 1 \\
+        & (S1, A2): 1 \\
+        & (S2, A1): 0 \\
+        & (S2, A3): 1 \\
+        & (S3, A4): 1 \\
+        \eta = \frac{1}{1 + 1} = \frac{1}{2} \\
+        \hat{Q}^{(5)}_{opt}(S3, A4) &= \frac{1}{2}(100) + \frac{1}{2} \left[ 100 + 0 \right] \\
+        &= 50 + 50 \\
+        &= 100 \\
+        & \begin{array}{c}
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+                \hline
+                & t=0 & t=1 & t=2 & t=3 & t=4 & t=5 \\
+                \hline
+                $\hat{Q}^{(t)}_{opt}(S1, A1)$ & 0 & 10 & 10 & 10 & 10 & 10 \\ 
+                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & 115 & 115 \\ 
+                $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 100 & 100 & 100 \\ 
+                \hline
+            \end{tabular}
+        \end{array}
+    \end{align*}
+
+    \noindent $\therefore$ the agent's final optimal policy given this data stream would be:
+
+    \begin{center}
+        \begin{tikzpicture}
+            % Define custom colors
+            \definecolor{customblue}{rgb}{0, 0, 1} % Example RGB for blue
+            \definecolor{custompurple}{rgb}{0.5, 0.0, 0.5} % Example RGB for purple
+        
+            % Define node styles
+            \tikzstyle{state} = [circle, draw, fill=customblue!20, minimum size=2em]
+            \tikzstyle{action} = [circle, draw, fill=custompurple!20, minimum size=2em]
+            \tikzstyle{arrow} = [->, thick]
+        
+            % Nodes
+            \node[state] (S1) {S1};
+            \node[action, right of=S1, node distance=3cm] (A2) {A2};
+            \node[state, right of=A2, node distance=3cm] (S3) {S3};
+            \node[action, right of=S3, node distance=3cm] (A4) {A4};
+            \node[state, right of=A4, node distance=3cm] (S4) {S4};
+        
+            % Arrows
+            \draw[arrow] (S1) -- (A2);
+            \draw[arrow] (A2) -- (S3);
+            \draw[arrow] (S3) -- (A4);
+            \draw[arrow] (A4) -- (S4);
+        \end{tikzpicture}
+    \end{center}
+    
 \end{enumerate}
 
 \section{Academic Integrity}
