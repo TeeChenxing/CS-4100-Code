@@ -299,11 +299,11 @@ along each dashed edge.
         &= 0.0735 \\\\
         \textbf{Path 2}&: S1 \rightarrow (A2 \:\: S2) \rightarrow (A3 \:\: S3) \rightarrow (A4 \:\: S4) \\
         &= P(A2 | S1) \cdot P(S2 | A2) \cdot P(A3 | S2) \cdot P(S3 | A3) \cdot P(A4 | S3) \cdot P(S4 | A4) \\
-        &= 0.5 \cdot 0.8 \cdot 0.5 \cdot 0.7 \cdot 1 \cdot 0.7 \\
+        &= 0.5 \cdot 0.8 \cdot 0.5 \cdot 0.7 \cdot 1.0 \cdot 0.7 \\
         &=  0.098 \\\\
         \textbf{Path 3}&: S1 \rightarrow (A2 \:\: S3) \rightarrow (A4 \:\: S4) \\
         &= P(A2 | S1) \cdot P(S3 | A2) \cdot P(A4 | S3) \cdot P(S4 | A4) \\
-        &= 0.5 \cdot 0.2 \cdot 1 \cdot 0.7 \\
+        &= 0.5 \cdot 0.2 \cdot 1.0 \cdot 0.7 \\
         &= 0.07
     \end{align*}
 
@@ -354,8 +354,9 @@ along each dashed edge.
         & (S2, A1): 0 \\
         & (S2, A3): 0 \\
         & (S3, A4): 0 \\
-        \eta = \frac{1}{1 + 0} = 1 \\
-        \hat{Q}^{(1)}_{opt}(S1, A1) &= 0 + 1[10 + 0] \\
+        \eta (S1, A1) = \frac{1}{1 + 0} = 1 \\
+        \hat{Q}^{(1)}_{opt}(S1, A1) &= 0 + 1 \left[ 10 + \max \left( \hat{Q}^{(0)}_{opt}(S1, A1), \hat{Q}^{(0)}_{opt}(S1, A2), \hat{Q}^{(0)}_{opt}(S2, A1), \hat{Q}^{(0)}_{opt}(S2, A3)  \right) \right] \\
+        &= 0 + 1[10 + 0] \\
         &= 10 \\
         & \begin{array}{c}
             \begin{tabular}{|c|c|c|c|c|c|c|}
@@ -376,8 +377,9 @@ along each dashed edge.
         & (S2, A1): 0 \\
         & (S2, A3): 0 \\
         & (S3, A4): 0 \\
-        \eta = \frac{1}{1 + 0} = 1 \\
-        \hat{Q}^{(2)}_{opt}(S2, A3) &= 0 + 1[0 + 0] \\
+        \eta(S2, A3) = \frac{1}{1 + 0} = 1 \\
+        \hat{Q}^{(2)}_{opt}(S2, A3) &= 0 + 1 \left[ 0 + \max \left( \hat{Q}^{(1)}_{opt}(S2, A1), \hat{Q}^{(1)}_{opt}(S2, A3), \hat{Q}^{(1)}_{opt}(S3, A4) \right) \right] \\
+        &= 0 + 1[0 + 0] \\
         &= 0 \\
         & \begin{array}{c}
             \begin{tabular}{|c|c|c|c|c|c|c|}
@@ -398,9 +400,10 @@ along each dashed edge.
         & (S2, A1): 0 \\
         & (S2, A3): 1 \\
         & (S3, A4): 0 \\
-        \eta = \frac{1}{1 + 0} = 1 \\
-        \hat{Q}^{(3)}_{opt}(S3, A4) &= 0 + 1[100 + 0] \\
-        &= 100 \\
+        \eta(S3, A4) = \frac{1}{1 + 0} = 1 \\
+        \hat{Q}^{(3)}_{opt}(S3, A4) &= 0 + 1 \left[ 100 + \max \left( \hat{Q}^{(2)}_{opt}(S1, A1), \hat{Q}^{(2)}_{opt}(S1, A2), \hat{Q}^{(2)}_{opt}(S2, A1), \hat{Q}^{(2)}_{opt}(S2, A3) \right) \right] \\
+        &= 0 + 1[100 + 10] \\
+        &= 110 \\
         & \begin{array}{c}
             \begin{tabular}{|c|c|c|c|c|c|c|}
                 \hline
@@ -410,7 +413,7 @@ along each dashed edge.
                 $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & - & - \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & 0 & 0 & - & - \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & 0 & 0 & - & - \\ 
-                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 100 & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 110 & - & - \\ 
                 \hline
             \end{tabular}
         \end{array} \\
@@ -420,20 +423,20 @@ along each dashed edge.
         & (S2, A1): 0 \\
         & (S2, A3): 1 \\
         & (S3, A4): 1 \\
-        \eta = \frac{1}{1 + 0} = 1 \\
+        \eta(S1, A2) = \frac{1}{1 + 0} = 1 \\
         \hat{Q}^{(4)}_{opt}(S1, A2) &= 0 + 1 \left[ 15 + \max \left( \hat{Q}^{(3)}_{opt}(S2, A1), \hat{Q}^{(3)}_{opt}(S2, A3), \hat{Q}^{(3)}_{opt}(S3, A4) \right) \right] \\
-        &= 0 + 1 \left[ 15 + 100 \right] \\
-        &= 115 \\
+        &= 0 + 1 \left[ 15 + 110 \right] \\
+        &= 125 \\
         & \begin{array}{c}
             \begin{tabular}{|c|c|c|c|c|c|c|}
                 \hline
                 & t=0 & t=1 & t=2 & t=3 & t=4 & t=5 \\
                 \hline
                 $\hat{Q}^{(t)}_{opt}(S1, A1)$ & 0 & 10 & 10 & 10 & 10 & - \\ 
-                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & 115 & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & 125 & - \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & 0 & 0 & 0 & - \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & 0 & 0 & 0 & - \\ 
-                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 100 & 100 & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 110 & 110 & - \\ 
                 \hline
             \end{tabular}
         \end{array} \\
@@ -443,20 +446,21 @@ along each dashed edge.
         & (S2, A1): 0 \\
         & (S2, A3): 1 \\
         & (S3, A4): 1 \\
-        \eta = \frac{1}{1 + 1} = \frac{1}{2} \\
-        \hat{Q}^{(5)}_{opt}(S3, A4) &= \frac{1}{2}(100) + \frac{1}{2} \left[ 100 + 0 \right] \\
-        &= 50 + 50 \\
-        &= 100 \\
+        \eta(S3, A4) = \frac{1}{1 + 1} = \frac{1}{2} \\
+        \hat{Q}^{(5)}_{opt}(S3, A4) &= \frac{1}{2}(110) + \frac{1}{2} \left[ 100 + \max \Bigl( \hat{Q}^{(4)}_{opt}(S1, A1), \right.\\
+        & \quad \left. \hat{Q}^{(4)}_{opt}(S1, A2), \hat{Q}^{(4)}_{opt}(S2, A1), \hat{Q}^{(4)}_{opt}(S2, A3) \Bigr) \right] \\
+        &= 55 + \frac{1}{2} \left[ 100 + 125 \right] \\
+        &= 167.5 \\
         & \begin{array}{c}
             \begin{tabular}{|c|c|c|c|c|c|c|}
                 \hline
                 & t=0 & t=1 & t=2 & t=3 & t=4 & t=5 \\
                 \hline
                 $\hat{Q}^{(t)}_{opt}(S1, A1)$ & 0 & 10 & 10 & 10 & 10 & 10 \\ 
-                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & 115 & 115 \\ 
+                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & 125 & 125 \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & 0 & 0 & 0 & 0 \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & 0 & 0 & 0 & 0 \\ 
-                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 100 & 100 & 100 \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 110 & 110 & 167.5 \\ 
                 \hline
             \end{tabular}
         \end{array}
@@ -464,31 +468,7 @@ along each dashed edge.
 
     \noindent $\therefore$ the agent's final optimal policy given this data stream would be:
 
-    \begin{center}
-        \begin{tikzpicture}
-            % Define custom colors
-            \definecolor{customblue}{rgb}{0, 0, 1} % Example RGB for blue
-            \definecolor{custompurple}{rgb}{0.5, 0.0, 0.5} % Example RGB for purple
-        
-            % Define node styles
-            \tikzstyle{state} = [circle, draw, fill=customblue!20, minimum size=2em]
-            \tikzstyle{action} = [circle, draw, fill=custompurple!20, minimum size=2em]
-            \tikzstyle{arrow} = [->, thick]
-        
-            % Nodes
-            \node[state] (S1) {S1};
-            \node[action, right of=S1, node distance=3cm] (A2) {A2};
-            \node[state, right of=A2, node distance=3cm] (S3) {S3};
-            \node[action, right of=S3, node distance=3cm] (A4) {A4};
-            \node[state, right of=A4, node distance=3cm] (S4) {S4};
-        
-            % Arrows
-            \draw[arrow] (S1) -- (A2);
-            \draw[arrow] (A2) -- (S3);
-            \draw[arrow] (S3) -- (A4);
-            \draw[arrow] (A4) -- (S4);
-        \end{tikzpicture}
-    \end{center}
+    \[ \pi_{opt} = \Bigl\{ S1: A2, \: S2: A1, \: S3: A4, \: S4: X \Bigl\} \]
     
 \end{enumerate}
 

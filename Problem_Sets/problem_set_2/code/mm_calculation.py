@@ -22,7 +22,7 @@ def main():
 
     p0 = np.array([0.1, 0.6, 0.3])
     stationary_distribution = compute_stationary_distribution(Q1, p0, 10000)
-    print(f"Problem Set Matrix: {stationary_distribution}")
+    print(f"Problem Set Q2 Stationary Distribution: {stationary_distribution}")
 
     q4_value = (0.409 * 0.5 * 0.9) + (0.409 * 0 * 0) + (0.409 * 0.5 * 0.3)
     print(f"Q4 Value: {q4_value}")
