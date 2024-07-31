@@ -10,7 +10,7 @@ import sys
 nS = 16
 nA = 4
 
-slip_prob = .1  # autograder may use different value
+slip_prob = 0.1  # autograder may use different value
 actions = ['up', 'down', 'left', 'right']  # Human readable labels for actions
 
 p_0 = np.array([0 for _ in range(nS)])
@@ -30,6 +30,7 @@ def valid_neighbors(i,j):
         neighbors[3]=(i,j+1)
     return neighbors
 
+
 for i in range(4):
     for j in range(4):
         if i==0 and j==2:
@@ -44,6 +45,7 @@ for i in range(4):
                 for b in neighbors:
                     if b != a:
                         P[neighbors[b][0]*4+neighbors[b][1], i*4+j, a] = slip_prob/float(len(neighbors.items())-1)
+
 
 #################################################################
 # REWARD MATRIX
@@ -77,7 +79,7 @@ R[9,13,0] = -100
 R[9,5,1] = -100
 R[9,8,3] = -100
 
-env=gym.make('matrix_mdp/MatrixMDP-v0', p_0=p_0, p=P, r=R)
+env = gym.make('matrix_mdp/MatrixMDP-v0', p_0=p_0, p=P, r=R)
 
 #################################################################
 # Helper Functions
