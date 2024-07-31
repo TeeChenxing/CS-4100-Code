@@ -355,7 +355,7 @@ along each dashed edge.
         & (S2, A3): 0 \\
         & (S3, A4): 0 \\
         \eta (S1, A1) = \frac{1}{1 + 0} = 1 \\
-        \hat{Q}^{(1)}_{opt}(S1, A1) &= 0 + 1 \left[ 10 + \max \left( \hat{Q}^{(0)}_{opt}(S1, A1), \hat{Q}^{(0)}_{opt}(S1, A2), \hat{Q}^{(0)}_{opt}(S2, A1), \hat{Q}^{(0)}_{opt}(S2, A3)  \right) \right] \\
+        \hat{Q}^{(1)}_{opt}(S1, A1) &= 0 + 1 \left[ 10 + \max \left( \hat{Q}^{(0)}_{opt}(S2, A1), \hat{Q}^{(0)}_{opt}(S2, A3)  \right) \right] \\
         &= 0 + 1[10 + 0] \\
         &= 10 \\
         & \begin{array}{c}
@@ -378,7 +378,7 @@ along each dashed edge.
         & (S2, A3): 0 \\
         & (S3, A4): 0 \\
         \eta(S2, A3) = \frac{1}{1 + 0} = 1 \\
-        \hat{Q}^{(2)}_{opt}(S2, A3) &= 0 + 1 \left[ 0 + \max \left( \hat{Q}^{(1)}_{opt}(S2, A1), \hat{Q}^{(1)}_{opt}(S2, A3), \hat{Q}^{(1)}_{opt}(S3, A4) \right) \right] \\
+        \hat{Q}^{(2)}_{opt}(S2, A3) &= 0 + 1 \left[ 0 + \max \left( \hat{Q}^{(1)}_{opt}(S3, A4) \right) \right] \\
         &= 0 + 1[0 + 0] \\
         &= 0 \\
         & \begin{array}{c}
@@ -401,9 +401,9 @@ along each dashed edge.
         & (S2, A3): 1 \\
         & (S3, A4): 0 \\
         \eta(S3, A4) = \frac{1}{1 + 0} = 1 \\
-        \hat{Q}^{(3)}_{opt}(S3, A4) &= 0 + 1 \left[ 100 + \max \left( \hat{Q}^{(2)}_{opt}(S1, A1), \hat{Q}^{(2)}_{opt}(S1, A2), \hat{Q}^{(2)}_{opt}(S2, A1), \hat{Q}^{(2)}_{opt}(S2, A3) \right) \right] \\
-        &= 0 + 1[100 + 10] \\
-        &= 110 \\
+        \hat{Q}^{(3)}_{opt}(S3, A4) &= 0 + 1 \left[ 100 + \max \left( \hat{Q}^{(2)}_{opt}(S4, X) \right) \right] \\
+        &= 0 + 1[100 + 0] \\
+        &= 100 \\
         & \begin{array}{c}
             \begin{tabular}{|c|c|c|c|c|c|c|}
                 \hline
@@ -413,7 +413,7 @@ along each dashed edge.
                 $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & - & - \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & 0 & 0 & - & - \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & 0 & 0 & - & - \\ 
-                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 110 & - & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 100 & - & - \\ 
                 \hline
             \end{tabular}
         \end{array} \\
@@ -424,19 +424,19 @@ along each dashed edge.
         & (S2, A3): 1 \\
         & (S3, A4): 1 \\
         \eta(S1, A2) = \frac{1}{1 + 0} = 1 \\
-        \hat{Q}^{(4)}_{opt}(S1, A2) &= 0 + 1 \left[ 15 + \max \left( \hat{Q}^{(3)}_{opt}(S2, A1), \hat{Q}^{(3)}_{opt}(S2, A3), \hat{Q}^{(3)}_{opt}(S3, A4) \right) \right] \\
-        &= 0 + 1 \left[ 15 + 110 \right] \\
-        &= 125 \\
+        \hat{Q}^{(4)}_{opt}(S1, A2) &= 0 + 1 \left[ 15 + \max \left( \hat{Q}^{(3)}_{opt}(S3, A4) \right) \right] \\
+        &= 0 + 1 \left[ 15 + 100 \right] \\
+        &= 115 \\
         & \begin{array}{c}
             \begin{tabular}{|c|c|c|c|c|c|c|}
                 \hline
                 & t=0 & t=1 & t=2 & t=3 & t=4 & t=5 \\
                 \hline
                 $\hat{Q}^{(t)}_{opt}(S1, A1)$ & 0 & 10 & 10 & 10 & 10 & - \\ 
-                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & 125 & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & 115 & - \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & 0 & 0 & 0 & - \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & 0 & 0 & 0 & - \\ 
-                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 110 & 110 & - \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 100 & 100 & - \\ 
                 \hline
             \end{tabular}
         \end{array} \\
@@ -447,20 +447,19 @@ along each dashed edge.
         & (S2, A3): 1 \\
         & (S3, A4): 1 \\
         \eta(S3, A4) = \frac{1}{1 + 1} = \frac{1}{2} \\
-        \hat{Q}^{(5)}_{opt}(S3, A4) &= \frac{1}{2}(110) + \frac{1}{2} \left[ 100 + \max \Bigl( \hat{Q}^{(4)}_{opt}(S1, A1), \right.\\
-        & \quad \left. \hat{Q}^{(4)}_{opt}(S1, A2), \hat{Q}^{(4)}_{opt}(S2, A1), \hat{Q}^{(4)}_{opt}(S2, A3) \Bigr) \right] \\
-        &= 55 + \frac{1}{2} \left[ 100 + 125 \right] \\
-        &= 167.5 \\
+        \hat{Q}^{(5)}_{opt}(S3, A4) &= \frac{1}{2}(100) + \frac{1}{2} \left[ 100 + \max \Bigl( \hat{Q}^{(4)}_{opt}(S4, X) \Bigr) \right] \\
+        &= 50 + \frac{1}{2} \left[ 100 + 0 \right] \\
+        &= 100 \\
         & \begin{array}{c}
             \begin{tabular}{|c|c|c|c|c|c|c|}
                 \hline
                 & t=0 & t=1 & t=2 & t=3 & t=4 & t=5 \\
                 \hline
                 $\hat{Q}^{(t)}_{opt}(S1, A1)$ & 0 & 10 & 10 & 10 & 10 & 10 \\ 
-                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & 125 & 125 \\ 
+                $\hat{Q}^{(t)}_{opt}(S1, A2)$ & 0 & 0 & 0 & 0 & 115 & 115 \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A1)$ & 0 & 0 & 0 & 0 & 0 & 0 \\ 
                 $\hat{Q}^{(t)}_{opt}(S2, A3)$ & 0 & 0 & 0 & 0 & 0 & 0 \\ 
-                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 110 & 110 & 167.5 \\ 
+                $\hat{Q}^{(t)}_{opt}(S3, A4)$ & 0 & 0 & 0 & 100 & 100 & 100 \\ 
                 \hline
             \end{tabular}
         \end{array}
