@@ -224,7 +224,7 @@ def q_learning(num_episodes, checkpoints, gamma=0.9, epsilon=0.9):
             if terminated or truncated:
                 break
 
-        epsilon = 0.999 * epsilon
+        epsilon = 0.9999 * epsilon
 
         if i in checkpoints:
             V_opt = calculate_V_opt(Q)
