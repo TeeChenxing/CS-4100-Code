@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import json 
 import matrix_mdp
 import sys
+import seaborn as sns
 
 
 nS = 16
@@ -153,6 +154,9 @@ def q_learning(num_episodes, checkpoints, gamma=0.9, epsilon=0.9):
     '''
     YOUR CODE HERE
     '''
+    Q = np.random.rand(16, 4).astype(np.float64)
+    optimal_policy = np.random.randint(0, 4, size=16)
+    V_opt_checkpoint_values = np.vstack([np.random.randint(0, 4, size=16) for _ in range(3)])
 
     return Q, optimal_policy, V_opt_checkpoint_values
 
@@ -172,10 +176,11 @@ def plot_heatmaps(V_opt, filename):
     None
     """
 
-    '''
-    YOUR CODE HERE
-    '''
-
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(V_opt.reshape(4, 4), annot=True, cmap="YlGnBu", cbar=False, linewidths=.5)
+    plt.title("Optimal Policy Heatmap")
+    plt.savefig(filename)
+    plt.close()
 
 '''
 If you need to make changes below for debugging, please first note down the defaults specified below.
@@ -184,9 +189,17 @@ Your submission should include plots generated using these default values, and s
 
 def main(): 
     Q, optimal_policy, V_opt_checkpoint_values = q_learning(10000, checkpoints=[10, 500, 10000])
-    plot_heatmaps(V_opt_checkpoint_values[0], "heatmap_10.png")
-    plot_heatmaps(V_opt_checkpoint_values[0], "heatmap_500.png")
-    plot_heatmaps(V_opt_checkpoint_values[1], "heatmap_10000.png")
+
+    folder_path = "Programming_Assignments/Assignment_2"
+    plot_heatmaps(V_opt_checkpoint_values[0], f"{folder_path}/heatmap_10.png")
+    plot_heatmaps(V_opt_checkpoint_values[1], f"{folder_path}/heatmap_500.png")
+    plot_heatmaps(V_opt_checkpoint_values[2], f"{folder_path}/heatmap_10000.png")
+
+    print(Q)
+    print()
+    print(optimal_policy)
+    print()
+    print(V_opt_checkpoint_values)
 
 if __name__ == "__main__":
     main()
