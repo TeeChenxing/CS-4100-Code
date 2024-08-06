@@ -95,10 +95,9 @@ represented along the edges (note that each edge is directional).
     
     \item \textbf{Given that we start in the state $S2$, what is the probability of returning to $S2$ after two transitions? (Show your calculations.) \hfill \textcolor{teal}{(2)}}
     \begin{align*}
-        & \hfill \text{Probability of starting at S2} \hfill = 0.409 \\\\
-        P(S2 \rightarrow X \rightarrow S2) &= P(S2 \rightarrow S1 \rightarrow S2) + P(S2 \rightarrow S2 \rightarrow S2) + P(S2 \rightarrow S3 \rightarrow S2) \\
-        P(S2 \rightarrow X \rightarrow S2) &= (0.409 \cdot 0.5 \cdot 0.9) + (0.409 \cdot 0 \cdot 0) + (0.409 \cdot 0.5 \cdot 0.3) \\
-        P(S2 \rightarrow X \rightarrow S2) &= 0.2454
+        P(X \rightarrow S2 \: | \: S2) &= P(S1 \rightarrow S2 \: | \: S2) + P(S2 \rightarrow S2 \: | \: S2) + P(S3 \rightarrow S2 \: | \: S2) \\
+        &= (0.5 \cdot 0.9) + (0 \cdot 0) + (0.5 \cdot 0.3) \\
+        &= 0.6
     \end{align*}
 
     \item \textbf{Given the starting probability distribution $p_0 = [0.1, 0.6, 0.3]$, what is the probability of ending up in $S2$ after exactly two transitions? (Show your calculations.) \hfill \textcolor{teal}{(2)}}
@@ -304,10 +303,14 @@ along each dashed edge.
         \textbf{Path 3}&: S1 \rightarrow (A2 \:\: S3) \rightarrow (A4 \:\: S4) \\
         &= P(A2 | S1) \cdot P(S3 | A2) \cdot P(A4 | S3) \cdot P(S4 | A4) \\
         &= 0.5 \cdot 0.2 \cdot 1.0 \cdot 0.7 \\
-        &= 0.07
+        &= 0.07 \\\\
+        \textbf{Path 4}&: S1 \rightarrow (A1 \:\: S1) \rightarrow (A2 \:\: S3) \rightarrow (A4 \:\: S4) \\
+        &= P(A1 | S1) \cdot P(S1 | A1) \cdot P(A2 | S1) \cdot P(S3 | A2) \cdot P(A4 | S3) \cdot P(S4 | A4) \\
+        &= 0.5 \cdot 0.4 \cdot 0.5 \cdot 0.2 \cdot 1.0 \cdot 0.7 \\
+        &=  0.014
     \end{align*}
 
-    $\therefore \:$ There is a $0.0735 + 0.098 + 0.07 = 0.2415$ probability that we can reach S4 from S1 using paths of at most length 3.
+    $\therefore \:$ There is a $0.0735 + 0.098 + 0.07 + 0.014 = 0.2555$ probability that we can reach S4 from S1 using paths of at most length 3.
 
     \item \textbf{Given that $R(S1, A1, S2) = 10$, $R(S1, A2, S2) = 10$, $R(S1, A2, S3) = 15$, $R(S3, A4, S4) = 100$, 
     and that rewards for all other transitions are $0$, write and expand the optimal value
