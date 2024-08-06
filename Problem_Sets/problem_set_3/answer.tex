@@ -80,7 +80,16 @@ to each of the classes.
     $b = 0.05$ and the true label encoded as $y_i = [0, 1]$, compute the cross entropy loss and
     show every step of your calculation. (Hint: a logistic regression gives you the probability of the '1' class.). \hfill \textcolor{teal}{(4)}}
     
-    \par
+    \begin{align*}
+        \hat{y}_i &=  \sigma\left(\begin{bmatrix}0.5 & 0.1 & -0.8 & 0.9 & 0.0\end{bmatrix} \cdot \begin{bmatrix} 6 \\ 4 \\ 2 \\ 3 \\ 1 \end{bmatrix} + 0.05\right) \\
+        &= \sigma\Big(4.5 + 0.05\Big) \\
+        &= \sigma(4.55) \\
+        &= \frac{1}{1 + e^{-4.55}} \\
+        &= 0.9895 \\\\
+        L(x_i, y_i) &= -\begin{bmatrix}0 & 1\end{bmatrix} \cdot log(0.9895) \\
+        &= 0 -log(0.9895) \\
+        &= 0.0106
+    \end{align*}
     
     \item \textbf{The Rectified Linear Unit (ReLU) activation function is defined as:}
     
@@ -146,11 +155,11 @@ to test neural networks. Read the full details about this dataset \href{https://
 \noindent The starter code for this part of the assignment is called "fashionmnist.py". The skeleton
 code serves as a general guide. There are some sections without any guidelines where
 you will be expected to research and experiment with various techniques to find a good
-approach. You must use PyTorch in this section, which is well-documented online.
+approach. You must use PyTorch in this section, which is well-documented online. \hfill \textcolor{teal}{(30)}
 
 \vspace{\baselineskip}
 
-\noindent \textbf{\textcolor{crimson}{Your accuracy on the testing dataset must be greater or equal to 80\%.}}
+\noindent \textbf{\textcolor{crimson}{Your accuracy on the testing dataset must be greater or equal to \underline{80\%}.}}
 
 \vspace{\baselineskip}
 
