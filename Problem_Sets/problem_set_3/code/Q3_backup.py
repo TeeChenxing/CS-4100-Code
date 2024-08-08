@@ -76,12 +76,22 @@ def compute_w_gradient(yi, S, sig_val, ReLU_val):
     fifth_layer = 1
     sixth_layer = ReLU_val
 
+    print("Respect to W nodes")
+    print(f"First Layer: {first_layer}")
+    print(f"Second Layer: {second_layer}")
+    print(f"Third Layer: {third_layer}")
+    print(f"Fourth Layer: {fourth_layer}")
+    print(f"Fifth Layer: {fifth_layer}")
+    print(f"Sixth Layer: {sixth_layer}")
+
     result = first_layer * second_layer
     result = result.dot(third_layer)
     result = result * fourth_layer
     result = np.outer(result, sixth_layer)
 
-    return result
+    print(f"Result: {result}")
+    print()
+    return 0
 
 
 def compute_v_gradient(yi, S, w, sig_val, ReLU_val, vi, xi):
@@ -94,6 +104,17 @@ def compute_v_gradient(yi, S, w, sig_val, ReLU_val, vi, xi):
     seventh_layer = ReLU_derivative(vi, xi)
     eigth_layer = 1
     ninth_layer = xi
+
+    print("Respect to V nodes")
+    print(f"First Layer: {first_layer}")
+    print(f"Second Layer: {second_layer}")
+    print(f"Third Layer: {third_layer}")
+    print(f"Fourth Layer: {fourth_layer}")
+    print(f"Fifth Layer: {fifth_layer}")
+    print(f"Sixth Layer: {sixth_layer}")
+    print(f"Seventh Layer: {seventh_layer}")
+    print(f"Eight Layer: {eigth_layer}")
+    print(f"Ninth Layer: {ninth_layer}")
 
     result = first_layer * second_layer
     result = result.dot(third_layer)
@@ -128,12 +149,6 @@ def main():
 
     w_gradient = compute_w_gradient(px, softmax_values, sigmoid_values, ReLU_values)
     v_gradient = compute_v_gradient(px, softmax_values, wi, sigmoid_values, ReLU_values, vi, x)
-    
-    print("W Gradient:")
-    print(w_gradient)
-    print()
-    print("V Gradient:")
-    print(v_gradient)
 
 if __name__ == "__main__":
     main()

@@ -29,13 +29,9 @@ def sigmoid_activation(w, x, b):
 
 def softmax_activation(x):
     softmax_values = []
-    denominator = 0
 
     for xi in x:
-        denominator += np.exp(xi)
-
-    for xi in x:
-        value = np.exp(xi) / denominator
+        value = np.exp(xi) / np.sum(np.exp(x))
         softmax_values.append(value)
 
     return np.array(softmax_values)
@@ -59,6 +55,9 @@ def main():
     
     v_biases = np.array([0.02, -0.01])
     w_biases = np.array([0.0, 0.05, 0.04])
+
+    # v_biases = np.array([0, 0])
+    # w_biases = np.array([0, 0, 0])
 
     px = np.array([0, 0, 1])
 

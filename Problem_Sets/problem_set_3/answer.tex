@@ -17,6 +17,23 @@
 \usepackage{amssymb}
 \usepackage{xcolor}
 \usepackage{titlesec}
+\usepackage{listings}
+
+% Define Python Code
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  captionpos=b,
+}
+
 
 % Define link color
 \hypersetup{
@@ -174,7 +191,15 @@ to each of the classes.
     the $log$ operator refers to the natural logarithm (base $exp$). Report your final values and a
     screenshot of your code. HINT: \href{https://towardsdatascience.com/derivative-of-the-softmax-function-and-the-categorical-cross-entropy-loss-ffceefc081d1}{[Derivative of Softmax]} \hfill \textcolor{teal}{(5 + 5)}}
     
-    \par 
+    \begin{figure}[H]
+        \centering  
+        \includegraphics[height=0.25\textheight]{Q3_tree.png}
+        \label{fig:Q3_tree}
+    \end{figure}
+
+    \lstinputlisting[language=Python, caption=Python Code to Compute Derivative]{code/Q3.py}
+
+    \lstinputlisting[language=Python, caption=Output of Listing 1]{code/Q3_output.txt}
 
 \end{enumerate}
 
