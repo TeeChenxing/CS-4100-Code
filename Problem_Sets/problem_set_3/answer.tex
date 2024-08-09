@@ -238,18 +238,49 @@ approach. You must use PyTorch in this section, which is well-documented online.
     class number). The second figure should be a single image classified correctly by your
     model and its corresponding class label. \hfill \textcolor{teal}{(3)}}
 
-    \par
+    \begin{figure}[H]
+        \centering
+        \begin{minipage}[b]{0.45\textwidth}
+            \centering  
+            \includegraphics[height=0.2\textheight]{Q4_correct.png}
+            \caption{Correctly and Incorrectly Classified Images}
+            \label{fig:Q4_correct}
+        \end{minipage}
+        \hspace{0.05\textwidth}
+        \begin{minipage}[b]{0.45\textwidth}
+            \centering  
+            \includegraphics[height=0.2\textheight]{Q4_incorrect.png}
+            \label{fig:Q4_incorrect}
+        \end{minipage}
+    \end{figure}
 
     \item \textbf{Submit a plot showing your training loss over time. \hfill \textcolor{teal}{(2)}}
 
-    \par 
+    \begin{figure}[H]
+        \centering  
+        \includegraphics[height=0.25\textheight]{Q5_training_loss.png}
+        \caption{Training Loss}
+        \label{fig:Q5_training_loss}
+    \end{figure}
 
     \item \textbf{Assume both the testing and training datasets have twice as many coat images as
     shirt images, and answer the following questions: \hfill \textcolor{teal}{(6)}}
     \begin{enumerate}
         \item \textbf{Would accuracy still be a good metric?}
+        
+        \par Since there are now as many coat images as shirt images, if the model simply predicts 
+        coats more often, it will achieve a higher accuracy due to the data imbalance. This can be misleading 
+        since the model can perform poorly when classifying shirt images but still have high overall
+        accuracy due to the abundance of coat images and its tendency to predict coats more often.
+
         \item \textbf{How would you modify your accuracy metric to account for data imbalance?}
+        
+        \par
+
         \item \textbf{What other metrics can you use to evaluate model performance?}
+        
+        \par We can use precision and/or recall instead of accuracy when facing an unbalanced dataset.
+
     \end{enumerate}
 
     \par 
