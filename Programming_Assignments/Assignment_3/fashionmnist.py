@@ -9,16 +9,11 @@ from torchvision.transforms import ToTensor
 from torch.utils.data import DataLoader
 
 batch_size = 64
-labels_map = {0: "T-Shirt",
-              1: "Trouser",
-              2: "Pullover",
-              3: "Dress",
-              4: "Coat",
-              5: "Sandal",
-              6: "Shirt",
-              7: "Sneaker",
-              8: "Bag",
+labels_map = {0: "T-Shirt", 1: "Trouser", 2: "Pullover",
+              3: "Dress",   4: "Coat",    5: "Sandal",
+              6: "Shirt",   7: "Sneaker", 8: "Bag",
               9: "Ankle Boot"}
+
 
 class Net(nn.Module):
     def __init__(self):
@@ -140,11 +135,11 @@ def plot_training_loss(loss_history, save_path):
     plt.grid(True)
     plt.savefig(save_path)
 
+net = Net()
 
 def main():
     directory = "Programming_Assignments/Assignment_3/"
     figure_directory = "Problem_Sets/problem_set_3/"
-    net = Net()
 
     training_data = torchvision.datasets.FashionMNIST(root=f"{directory}data", train=True, download=True, transform=ToTensor())
     test_data = torchvision.datasets.FashionMNIST(root=f"{directory}data", train=False, download=True, transform=ToTensor())
@@ -152,12 +147,12 @@ def main():
     train_dataloader = DataLoader(training_data, batch_size=batch_size)
     test_dataloader = DataLoader(test_data, batch_size=batch_size)
 
-    learning_rate = 0.15
+    learning_rate = 0.001
     epochs = 10
 
     # loss function and optimizer
     loss_fn = nn.CrossEntropyLoss()
-    optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate)
+    optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
     loss_history = []
 
